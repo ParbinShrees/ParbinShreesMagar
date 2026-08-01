@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-circuit-bg: #15291F;
+  --color-circuit-surface: #1D3629;
+  --color-circuit-text: #EDE8DD;
+  --color-circuit-copper: #C6903F;
+  --color-circuit-status: #E8563A;
+
+  --font-mono: "IBM Plex Mono", monospace;
+  --font-sans: "IBM Plex Sans", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-circuit-bg);
+    color: var(--color-circuit-text);
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-mono);
+  }
+}
