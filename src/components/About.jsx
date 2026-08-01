@@ -2,16 +2,16 @@ import React from 'react';
 
 const About = () => {
   return (
-    <section id="about" className="py-20 border-t border-[#1D3629]">
+    <section id="about" className="py-24 bg-white border-t border-[#d2d2d7]">
       <div className="max-w-4xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row gap-12 items-start">
+        <div className="flex flex-col md:flex-row gap-12 items-center">
           
           <div className="md:w-1/3">
-            <h2 className="text-3xl font-mono font-bold text-[#EDE8DD] mb-2">About</h2>
-            <div className="w-12 h-1 bg-[#C6903F] mb-6"></div>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#1d1d1f] mb-2 tracking-tight">About</h2>
+            <div className="w-16 h-1.5 bg-[#0071e3] mb-6 rounded-full"></div>
           </div>
           
-          <div className="md:w-2/3 space-y-6 text-lg leading-relaxed opacity-90">
+          <div className="md:w-2/3 space-y-6 text-xl md:text-2xl leading-relaxed text-[#1d1d1f] font-medium">
             <p>
               "I'm Parbin — a developer who works across the stack with Java, React, and Node.js, and then takes it further by wiring projects into real hardware with Arduino."
             </p>

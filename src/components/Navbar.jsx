@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logoImg from '../projectpictures/logo.jpg';
+import logoImg from '../projectpictures/logo.png';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -75,22 +75,22 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-[#1D3629]/95 backdrop-blur-sm shadow-md py-4' : 'bg-transparent py-6'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/70 backdrop-blur-md shadow-[0_1px_3px_rgba(0,0,0,0.05)] py-4' : 'bg-transparent py-6'}`}>
       <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
-        <Link to="/" className="hover:opacity-80 transition-opacity flex items-center">
+        <Link to="/" className="hover:opacity-80 hover:scale-105 transition-all duration-300 flex items-center">
           <img src={logoImg} alt="PSM Logo" className="h-10 w-auto object-contain" />
         </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex gap-8">
           {navLinks.map((link) => 
-            renderLink(link, "text-[#EDE8DD] font-mono text-sm hover:text-[#C6903F] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6903F] rounded")
+            renderLink(link, "text-[#1d1d1f] font-medium text-sm hover:text-[#0071e3] hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0071e3] rounded inline-block")
           )}
         </div>
 
         {/* Mobile Nav Toggle */}
         <button 
-          className="md:hidden text-[#EDE8DD] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6903F] rounded p-1"
+          className="md:hidden text-[#1d1d1f] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0071e3] rounded p-1"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle navigation menu"
         >
@@ -106,9 +106,9 @@ const Navbar = () => {
 
       {/* Mobile Nav Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-[#1D3629] border-t border-[#15291F] shadow-lg flex flex-col py-4 px-6 gap-4">
+        <div className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md border-t border-[#d2d2d7] shadow-[0_4px_24px_rgba(0,0,0,0.06)] flex flex-col py-4 px-6 gap-4">
           {navLinks.map((link) => 
-            renderLink(link, "text-[#EDE8DD] font-mono text-base hover:text-[#C6903F] transition-colors w-full", () => setIsMobileMenuOpen(false))
+            renderLink(link, "text-[#1d1d1f] text-base hover:text-[#0071e3] transition-colors w-full py-2 border-b border-[#d2d2d7]/50 last:border-0", () => setIsMobileMenuOpen(false))
           )}
         </div>
       )}

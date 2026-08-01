@@ -21,7 +21,7 @@ const AnimatedRoutes = () => {
 function App() {
   return (
     <BrowserRouter>
-      <div className="bg-[#15291F] min-h-screen font-sans text-[#EDE8DD] selection:bg-[#C6903F] selection:text-[#15291F]">
+      <div className="min-h-screen font-sans selection:bg-[#0071e3] selection:text-white">
         <Navbar />
         <main>
           <AnimatedRoutes />

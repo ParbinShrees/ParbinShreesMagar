@@ -6,7 +6,7 @@ const PageTransition = ({ children }) => {
   return (
     <>
       <motion.div
-        className="fixed inset-0 z-[100] flex items-center justify-center bg-[#15291F] pointer-events-none"
+        className="fixed inset-0 z-[100] flex items-center justify-center bg-white pointer-events-none"
         initial={{ y: 0, opacity: 1 }}
         animate={{ y: '-100%', opacity: 0 }}
         exit={{ y: 0, opacity: 1 }}

@@ -1,10 +1,21 @@
+// Local development API server — mirrors the Vercel serverless function
+// Run with: npm run dev:api
+// Then the Vite proxy will forward /api/* requests to this server.
+
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
-  }
+dotenv.config();
 
+const app = express();
+const PORT = 3001;
+
+app.use(cors());
+app.use(express.json());
+
+app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
@@ -12,8 +23,8 @@ export default async function handler(req, res) {
   }
 
   if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
-    console.warn('No SMTP credentials set — skipping email send.');
-    return res.status(200).json({ message: 'Message received (no SMTP credentials configured).' });
+    console.warn('[dev-server] No SMTP credentials in .env — skipping real send.');
+    return res.status(200).json({ message: 'Message sent successfully (dev mock — no SMTP credentials set).' });
   }
 
   const transporter = nodemailer.createTransport({
@@ -28,9 +39,8 @@ export default async function handler(req, res) {
 
   try {
     await transporter.sendMail({
-      // Gmail requires 'from' to be your own authenticated address
-      from: `"Parbin Portfolio" <${process.env.SMTP_USER}>`,
-      replyTo: `"${name}" <${email}>`,
+      from: `"${name}" <${process.env.SMTP_USER}>`,
+      replyTo: email,
       to: process.env.CONTACT_EMAIL || process.env.SMTP_USER,
       subject: `📬 New Portfolio Message from ${name}`,
       text: `You have a new message from your portfolio contact form.\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
@@ -69,9 +79,15 @@ export default async function handler(req, res) {
       `,
     });
 
+    console.log(`[dev-server] Email sent to ${process.env.CONTACT_EMAIL} from ${name} (${email})`);
     return res.status(200).json({ message: 'Message sent successfully' });
   } catch (error) {
-    console.error('Error sending email:', error.message);
+    console.error('[dev-server] Email send error:', error.message);
     return res.status(500).json({ message: 'Failed to send message. Please try again.', error: error.message });
   }
-}
+});
+
+app.listen(PORT, () => {
+  console.log(`\n  ✉️  Local API server running at http://localhost:${PORT}`);
+  console.log(`  SMTP_USER loaded: ${process.env.SMTP_USER ? '✅ ' + process.env.SMTP_USER : '❌ Not set (check .env)'}\n`);
+});

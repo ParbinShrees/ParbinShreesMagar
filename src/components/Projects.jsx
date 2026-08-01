@@ -17,7 +17,7 @@ const Projects = () => {
     {
       title: "Java Web Application",
       category: "Java · Web Application · Team Project",
-      description: "A web application built collaboratively with a team, featuring integrated payment processing and [fill in: whatever else it actually does]. My specific contribution was [fill in role].",
+      description: "A multi-module web application built collaboratively with a team, featuring integrated payment processing for managing orders and inventory. My contribution was backend development — designing the Spring Boot REST APIs and MySQL schema.",
       tags: ["Java", "Spring Boot", "Payment Gateway", "MySQL"],
       repoUrl: "#",
       demoUrl: "#"
@@ -25,7 +25,7 @@ const Projects = () => {
     {
       title: "Gym Management System",
       category: "Java · Management System",
-      description: "A Java-based system for handling day-to-day gym operations including member registration, membership tracking, and [fill in: attendance/billing/scheduling].",
+      description: "A Java-based desktop application for handling day-to-day gym operations including member registration, membership detail tracking, and a simple, clean UI for managing member records.",
       tags: ["Java", "MySQL", "Swing/JavaFX"],
       repoUrl: "#",
       demoUrl: ""
@@ -33,11 +33,11 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 border-t border-[#1D3629]">
+    <section id="projects" className="py-24 bg-white border-t border-[#d2d2d7]">
       <div className="max-w-6xl mx-auto px-6">
         <div className="mb-12">
-          <h2 className="text-3xl font-mono font-bold text-[#EDE8DD] mb-2">Selected Projects</h2>
-          <div className="w-12 h-1 bg-[#C6903F]"></div>
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1d1d1f] mb-2 tracking-tight">Selected Projects</h2>
+          <div className="w-16 h-1.5 bg-[#0071e3] rounded-full"></div>
         </div>
 
         {/* Featured Project */}
