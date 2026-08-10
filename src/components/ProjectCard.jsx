@@ -4,8 +4,8 @@ const ProjectCard = ({ title, category, description, tags, repoUrl, demoUrl, ima
   return (
     <div className="bg-white border border-[#d2d2d7] rounded-3xl overflow-hidden flex flex-col group hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] transition-all duration-300 h-full shadow-sm">
       
-      {/* Image / Placeholder */}
-      <div className="h-48 bg-[#f5f5f7] flex items-center justify-center border-b border-[#d2d2d7] overflow-hidden">
+      {/* Image / Card Header */}
+      <div className="h-48 bg-gradient-to-br from-[#f5f5f7] to-[#e8e8ed] flex items-center justify-center border-b border-[#d2d2d7] overflow-hidden relative group-hover:bg-[#f0f0f5] transition-colors">
         {imageUrl ? (
           <img 
             src={imageUrl} 
@@ -14,13 +14,17 @@ const ProjectCard = ({ title, category, description, tags, repoUrl, demoUrl, ima
             onError={(e) => {
               e.target.onerror = null;
               e.target.style.display = 'none';
-              e.target.nextSibling.style.display = 'block';
+              e.target.nextSibling.style.display = 'flex';
             }}
           />
-        ) : null}
-        <span className={`text-xs font-semibold text-[#86868b] ${imageUrl ? 'hidden' : 'block'}`}>
-          [Add project screenshot here]
-        </span>
+        ) : (
+          <div className="flex flex-col items-center justify-center text-[#86868b] space-y-2">
+            <svg className="w-10 h-10 text-[#0071e3]/60 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#86868b]">{title}</span>
+          </div>
+        )}
       </div>
 
       <div className="p-6 flex flex-col flex-grow">

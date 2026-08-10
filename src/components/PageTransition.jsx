@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import transitionLogo from '../projectpictures/transition-logo.png';
+import transitionLogo from '../projectpictures/transistion.logo.png';
 
 const PageTransition = ({ children }) => {
   return (

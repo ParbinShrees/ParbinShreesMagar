@@ -2,16 +2,22 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
 
-// Import setup photos
+// Import setup & project photos
 import setup1 from '../projectpictures/setup1.jpg';
 import setup2 from '../projectpictures/setup2.jpg';
+import profileImg from '../projectpictures/profile.jpg';
+import duopongImg from '../projectpictures/duopong.jpeg';
+import roselleImg from '../projectpictures/roselle.png';
 
 // ─────────────────────────────────────────────
 //  Data
 // ─────────────────────────────────────────────
 const galleryPhotos = [
-  { src: setup1, alt: 'Night coding setup with Razer peripherals',  caption: 'Night Mode', description: 'Deep-focus session with Razer green glow.' },
   { src: setup2, alt: 'Dual-monitor workstation with Razer gear',   caption: 'Workstation', description: 'Dual-display setup — laptop + external monitor.' },
+  { src: setup1, alt: 'Night coding setup with Razer peripherals',  caption: 'Night Mode', description: 'Deep-focus session with Razer green glow.' },
+  { src: duopongImg, alt: 'DuoPong physical table tennis machine build', caption: 'DuoPong Build', description: 'Arduino-powered arcade table tennis hardware.' },
+  { src: profileImg, alt: 'Parbin Shrees Magar', caption: 'Developer Profile', description: 'Full-Stack & Hardware developer.' },
+  { src: roselleImg, alt: 'Roselle storefront application', caption: 'Roselle Storefront', description: 'React e-commerce storefront for handcrafted floral bouquets.' },
 ];
 
 const hobbies = [

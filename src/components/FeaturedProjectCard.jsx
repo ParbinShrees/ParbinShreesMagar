@@ -1,4 +1,5 @@
 import React from 'react';
+import duopongImg from '../projectpictures/duopong.jpeg';
 
 const FeaturedProjectCard = () => {
   return (
@@ -13,9 +14,8 @@ const FeaturedProjectCard = () => {
 
       {/* Media Placeholder (Video/GIF for Hardware) */}
       <div className="lg:w-1/2 bg-[#f5f5f7] min-h-[300px] flex items-center justify-center relative border-b lg:border-b-0 lg:border-r border-[#d2d2d7] overflow-hidden">
-        {/* We use an image tag so you can just drop your photo named 'duopong.jpg' into the public folder */}
         <img 
-          src="/duopong.jpg" 
+          src={duopongImg} 
           alt="DuoPong Physical Hardware Build" 
           className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
           onError={(e) => {
@@ -29,7 +29,7 @@ const FeaturedProjectCard = () => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span className="text-sm px-4 text-[#86868b]">Save your image as public/duopong.jpg to see it here!</span>
+          <span className="text-sm px-4 text-[#86868b]">DuoPong Arcade Machine</span>
         </div>
       </div>
 
