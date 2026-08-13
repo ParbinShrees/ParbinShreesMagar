@@ -4,20 +4,35 @@ import PageTransition from '../components/PageTransition';
 
 // Import setup & project photos
 import setup1 from '../projectpictures/setup1.jpg';
-import setup2 from '../projectpictures/setup2.jpg';
+import setup2 from '../projectpictures/setup2.jpeg';
 import profileImg from '../projectpictures/profile.jpg';
 import duopongImg from '../projectpictures/duopong.jpeg';
 import roselleImg from '../projectpictures/roselle.png';
+
+// Import photography gallery
+import photo1 from '../projectpictures/myphotography/1.jpeg';
+import photo2 from '../projectpictures/myphotography/2.jpeg';
+import photo3 from '../projectpictures/myphotography/3.jpeg';
+import photo4 from '../projectpictures/myphotography/4.jpeg';
+import photo5 from '../projectpictures/myphotography/5.jpeg';
+import photo6 from '../projectpictures/myphotography/6.jpeg';
+import photo7 from '../projectpictures/myphotography/7.jpeg';
+import photo8 from '../projectpictures/myphotography/8.jpeg';
+import photo9 from '../projectpictures/myphotography/9.jpeg';
 
 // ─────────────────────────────────────────────
 //  Data
 // ─────────────────────────────────────────────
 const galleryPhotos = [
-  { src: setup2, alt: 'Dual-monitor workstation with Razer gear',   caption: 'Workstation', description: 'Dual-display setup — laptop + external monitor.' },
-  { src: setup1, alt: 'Night coding setup with Razer peripherals',  caption: 'Night Mode', description: 'Deep-focus session with Razer green glow.' },
-  { src: duopongImg, alt: 'DuoPong physical table tennis machine build', caption: 'DuoPong Build', description: 'Arduino-powered arcade table tennis hardware.' },
-  { src: profileImg, alt: 'Parbin Shrees Magar', caption: 'Developer Profile', description: 'Full-Stack & Hardware developer.' },
-  { src: roselleImg, alt: 'Roselle storefront application', caption: 'Roselle Storefront', description: 'React e-commerce storefront for handcrafted floral bouquets.' },
+  { src: photo1, alt: 'Turquoise mountain lake with prayer flags in the Himalayas', caption: 'Sacred Waters', description: 'A glacial lake adorned with colorful prayer flags beneath snow-capped Himalayan peaks.' },
+  { src: photo2, alt: 'Traditional Himalayan temple with red and gold fabric amid lush trees', caption: 'Mountain Monastery', description: 'Layers of traditional architecture peek through the canopy of an ancient tree.' },
+  { src: photo3, alt: 'Tree canopy reaching into a bright blue sky', caption: 'Into the Sky', description: 'Looking up through lush green branches toward open blue skies.' },
+  { src: photo4, alt: 'Snow-capped Himalayan peak with a river valley below', caption: 'Himalayan Pass', description: 'A towering snow-capped summit framed by steep valley walls and a rushing river.' },
+  { src: photo5, alt: 'Night mountain scene with warm orange lights and film grain', caption: 'Night in the Hills', description: 'Warm village lights dot the dark hillside as snow peaks glow faintly above.' },
+  { src: photo6, alt: 'Half-moon hanging in a clear blue daytime sky', caption: 'Daytime Moon', description: 'A crisp half-moon caught against a flawless blue afternoon sky.' },
+  { src: photo7, alt: 'Sweeping snowy Himalayan range with travelers on a mountain road', caption: 'High Altitude Road', description: 'Travelers pause on a rugged mountain road before a panoramic wall of snowy peaks.' },
+  { src: photo8, alt: 'Golden cumulonimbus clouds lit by sunset against a stormy sky', caption: 'Golden Cumulus', description: 'Towering storm clouds catch the last golden light of the day.' },
+  { src: photo9, alt: 'Small red propeller plane flying in an overcast grey sky', caption: 'Solo Flight', description: 'A lone red aircraft traced across a wide grey sky.' },
 ];
 
 const hobbies = [
@@ -78,55 +93,64 @@ const GallerySlider = () => {
     <>
       {/* ── Slider ── */}
       <div className="parbin-gallery-wrapper">
-        <button className="parbin-gallery-btn parbin-gallery-prev" onClick={prev} aria-label="Previous">
-          <i className="fas fa-chevron-left" />
-        </button>
+        <div className="parbin-gallery-inner">
+          <button className="parbin-gallery-btn parbin-gallery-prev" onClick={prev} aria-label="Previous">
+            <i className="fas fa-chevron-left" />
+          </button>
 
-        <div className="parbin-gallery-stage">
-          {galleryPhotos.map((photo, idx) => {
-            const offset = idx - current;
-            const isActive  = offset === 0;
-            const isPrev    = offset === -1 || (current === 0 && idx === total - 1 && offset !== 0);
-            const isNext    = offset === 1  || (current === total - 1 && idx === 0 && offset !== 0);
+          <div className="parbin-gallery-stage">
+            {galleryPhotos.map((photo, idx) => {
+              const offset = idx - current;
+              const isActive  = offset === 0;
+              const isPrev    = offset === -1 || (current === 0 && idx === total - 1 && offset !== 0);
+              const isNext    = offset === 1  || (current === total - 1 && idx === 0 && offset !== 0);
 
-            let zIndex   = 1;
-            let scale    = 0.82;
-            let opacity  = 0;
-            let translateX = 0;
-            let rotate   = 0;
+              let zIndex   = 1;
+              let scale    = 0.82;
+              let opacity  = 0;
+              let translateX = 0;
+              let rotate   = 0;
 
-            if (isActive) { zIndex = 10; scale = 1; opacity = 1; }
-            else if (isPrev || offset === -1) { zIndex = 5; scale = 0.88; opacity = 0.55; translateX = -38; rotate = -5; }
-            else if (isNext || offset === 1)  { zIndex = 5; scale = 0.88; opacity = 0.55; translateX =  38; rotate =  5; }
+              if (isActive) { zIndex = 10; scale = 1; opacity = 1; }
+              else if (isPrev || offset === -1) { zIndex = 5; scale = 0.88; opacity = 0.55; translateX = -38; rotate = -5; }
+              else if (isNext || offset === 1)  { zIndex = 5; scale = 0.88; opacity = 0.55; translateX =  38; rotate =  5; }
 
-            return (
-              <div
-                key={idx}
-                className="parbin-photo-card"
-                style={{
-                  transform: `translateX(${translateX}%) scale(${scale}) rotate(${rotate}deg)`,
-                  zIndex,
-                  opacity,
-                  transition: 'all 0.45s cubic-bezier(0.4,0,0.2,1)',
-                }}
-                onClick={() => { if (isActive) setLightbox(photo); else if (offset < 0) prev(); else next(); }}
-              >
-                <img src={photo.src} alt={photo.alt} className="parbin-photo-img" />
-                {isActive && (
-                  <div className="parbin-photo-caption">
-                    <span className="parbin-caption-title">{photo.caption}</span>
-                    <span className="parbin-caption-desc">{photo.description}</span>
-                    <span className="parbin-caption-open"><i className="fas fa-expand-alt" /> Click to enlarge</span>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+              return (
+                <div
+                  key={idx}
+                  className="parbin-photo-card"
+                  style={{
+                    transform: `translateX(${translateX}%) scale(${scale}) rotate(${rotate}deg)`,
+                    zIndex,
+                    opacity,
+                    transition: 'all 0.45s cubic-bezier(0.4,0,0.2,1)',
+                  }}
+                  onClick={() => { if (isActive) setLightbox(photo); else if (offset < 0) prev(); else next(); }}
+                >
+                  <div
+                    className="parbin-photo-blur-bg"
+                    style={{ backgroundImage: `url(${photo.src})` }}
+                  />
+                  <img src={photo.src} alt={photo.alt} className="parbin-photo-img" />
+                </div>
+              );
+            })}
+          </div>
+
+          <button className="parbin-gallery-btn parbin-gallery-next" onClick={next} aria-label="Next">
+            <i className="fas fa-chevron-right" />
+          </button>
         </div>
 
-        <button className="parbin-gallery-btn parbin-gallery-next" onClick={next} aria-label="Next">
-          <i className="fas fa-chevron-right" />
-        </button>
+        {/* Mobile-only nav row */}
+        <div className="parbin-gallery-nav-row">
+          <button className="parbin-gallery-btn" onClick={prev} aria-label="Previous">
+            <i className="fas fa-chevron-left" />
+          </button>
+          <button className="parbin-gallery-btn" onClick={next} aria-label="Next">
+            <i className="fas fa-chevron-right" />
+          </button>
+        </div>
       </div>
 
       {/* Dots */}
@@ -247,8 +271,9 @@ const ParbinPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              {/* Setup image */}
+              {/* Setup image — full view, no crop */}
               <div className="parbin-setup-img-wrap">
+                <div className="parbin-setup-img-bg" />
                 <img
                   src={setup2}
                   alt="Parbin's workstation"
@@ -257,23 +282,29 @@ const ParbinPage = () => {
                 />
               </div>
 
-              <h3 className="parbin-setup-title">
-                <i className="fas fa-desktop" /> Workstation Configuration
-              </h3>
+              <div className="parbin-setup-body">
+                <h3 className="parbin-setup-title">
+                  <span className="parbin-setup-title-icon"><i className="fas fa-desktop" /></span>
+                  Workstation Configuration
+                </h3>
 
-              <ul className="parbin-spec-list">
-                {[
-                  ['Laptop',       'Acer Predator Helios Neo 16'],
-                  ['CPU / GPU',    'Intel Core i5 13th Gen / NVIDIA RTX 4060'],
-                  ['Memory',       '16GB DDR5 RAM / 1TB NVMe SSD'],
-                  ['Peripherals',  'Razer Keyboard · Razer Mouse · External Monitor'],
-                ].map(([label, val]) => (
-                  <li key={label} className="parbin-spec-row">
-                    <span className="parbin-spec-label">{label}</span>
-                    <span className="parbin-spec-val">{val}</span>
-                  </li>
-                ))}
-              </ul>
+                <ul className="parbin-spec-list">
+                  {[
+                    { icon: 'fa-laptop',    label: 'Laptop',      val: 'Acer Predator Helios Neo 16' },
+                    { icon: 'fa-microchip', label: 'CPU / GPU',   val: 'Intel Core i5 13th Gen / RTX 4060' },
+                    { icon: 'fa-memory',    label: 'Memory',      val: '16GB DDR5 RAM · 1TB NVMe SSD' },
+                    { icon: 'fa-keyboard',  label: 'Peripherals', val: 'Razer Keyboard · Mouse · Monitor' },
+                  ].map(({ icon, label, val }) => (
+                    <li key={label} className="parbin-spec-row">
+                      <span className="parbin-spec-label">
+                        <i className={`fas ${icon} parbin-spec-icon`} />
+                        {label}
+                      </span>
+                      <span className="parbin-spec-val">{val}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </motion.div>
           </section>
 
@@ -400,51 +431,124 @@ const ParbinPage = () => {
         .parbin-tag:hover { background: #dceeff; transform: translateY(-2px); }
         .parbin-tag i { font-size: 0.8rem; }
 
-        /* Setup card */
+        /* ── Setup card ── */
         .parbin-setup-card {
           background: #ffffff;
           border: 1px solid #d2d2d7;
-          border-radius: 1.5rem;
+          border-radius: 1.75rem;
           overflow: hidden;
-          box-shadow: 0 2px 16px rgba(0,0,0,0.05);
-          transition: transform 0.3s, box-shadow 0.3s;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+          transition: transform 0.35s cubic-bezier(.22,.68,0,1.2), box-shadow 0.35s;
         }
-        .parbin-setup-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.10); }
+        .parbin-setup-card:hover { transform: translateY(-6px); box-shadow: 0 20px 56px rgba(0,0,0,0.13); }
 
+        /* Image area */
         .parbin-setup-img-wrap {
+          position: relative;
           width: 100%;
-          height: 220px;
-          overflow: hidden;
-          background: #1a1a1a;
+          background: #0e0e10;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 1.25rem 1.25rem 0;
+          border-bottom: 1px solid #1c1c1e;
         }
-        .parbin-setup-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .parbin-setup-card:hover .parbin-setup-img { transform: scale(1.04); }
+        .parbin-setup-img-bg {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(ellipse at 50% 0%, #1a2540 0%, #0e0e10 70%);
+          pointer-events: none;
+        }
+        .parbin-setup-img {
+          position: relative;
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          max-height: 340px;
+          object-fit: contain;
+          border-radius: 0.75rem 0.75rem 0 0;
+          display: block;
+          filter: drop-shadow(0 8px 32px rgba(0,0,0,0.5));
+          transition: transform 0.5s cubic-bezier(.22,.68,0,1.2), filter 0.4s;
+        }
+        .parbin-setup-card:hover .parbin-setup-img { transform: scale(1.03) translateY(-4px); filter: drop-shadow(0 16px 48px rgba(0,0,0,0.65)); }
+        .parbin-setup-img-badge {
+          position: absolute;
+          top: 1rem;
+          left: 1.25rem;
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          background: rgba(255,255,255,0.08);
+          backdrop-filter: blur(8px);
+          border: 1px solid rgba(255,255,255,0.12);
+          border-radius: 999px;
+          padding: 0.3rem 0.75rem 0.3rem 0.55rem;
+          font-size: 0.7rem;
+          font-weight: 600;
+          color: rgba(255,255,255,0.7);
+          letter-spacing: 0.04em;
+          gap: 0.35rem;
+        }
+        .parbin-setup-img-badge i { display: inline-block; }
 
+        /* Body */
+        .parbin-setup-body { padding: 0; }
         .parbin-setup-title {
           display: flex;
           align-items: center;
-          gap: 0.6rem;
-          font-size: 1.05rem;
+          gap: 0.75rem;
+          font-size: 1rem;
           font-weight: 700;
           color: #1d1d1f;
-          padding: 1.5rem 1.75rem 1rem;
-          border-bottom: 1px solid #d2d2d7;
+          padding: 1.4rem 1.75rem 1.1rem;
+          border-bottom: 1px solid #ebebee;
+          letter-spacing: -0.01em;
         }
-        .parbin-setup-title i { color: #0071e3; }
+        .parbin-setup-title-icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 2rem;
+          height: 2rem;
+          background: linear-gradient(135deg, #e8f0fe 0%, #dbeafe 100%);
+          border-radius: 0.5rem;
+          color: #0071e3;
+          font-size: 0.85rem;
+          flex-shrink: 0;
+        }
 
-        .parbin-spec-list { list-style: none; margin: 0; padding: 0 1.75rem 1.75rem; }
+        .parbin-spec-list { list-style: none; margin: 0; padding: 0.25rem 1.75rem 1.5rem; }
         .parbin-spec-row {
           display: flex;
           justify-content: space-between;
-          align-items: flex-start;
+          align-items: center;
           gap: 1rem;
-          padding: 0.75rem 0;
-          border-bottom: 1px solid #f0f0f3;
-          font-size: 0.9rem;
+          padding: 0.8rem 0;
+          border-bottom: 1px solid #f3f3f5;
+          font-size: 0.875rem;
         }
         .parbin-spec-row:last-child { border-bottom: none; }
-        .parbin-spec-label { color: #86868b; font-weight: 600; flex-shrink: 0; }
-        .parbin-spec-val { color: #1d1d1f; font-weight: 700; text-align: right; }
+        .parbin-spec-label {
+          display: flex;
+          align-items: center;
+          gap: 0.55rem;
+          color: #86868b;
+          font-weight: 600;
+          flex-shrink: 0;
+        }
+        .parbin-spec-icon {
+          width: 1.1rem;
+          text-align: center;
+          color: #0071e3;
+          font-size: 0.8rem;
+        }
+        .parbin-spec-val {
+          color: #1d1d1f;
+          font-weight: 700;
+          text-align: right;
+          font-size: 0.85rem;
+        }
 
         /* ─── Section headers ─── */
         .parbin-section { display: flex; flex-direction: column; gap: 2.5rem; }
@@ -461,51 +565,63 @@ const ParbinPage = () => {
         .parbin-gallery-wrapper {
           position: relative;
           display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+          padding: 0 1rem;
+        }
+        .parbin-gallery-inner {
+          display: flex;
           align-items: center;
           justify-content: center;
-          height: 420px;
-          overflow: visible;
+          gap: 1rem;
+          width: 100%;
+          max-width: 680px;
+          min-height: 580px;
         }
         .parbin-gallery-stage {
           position: relative;
-          width: 100%;
-          max-width: 680px;
-          height: 100%;
+          flex: 1;
+          min-height: 560px;
           display: flex;
           align-items: center;
           justify-content: center;
+          overflow: hidden;
         }
+        /* hide mobile nav on desktop */
+        .parbin-gallery-nav-row { display: none; }
         .parbin-photo-card {
           position: absolute;
-          width: 88%;
-          max-width: 560px;
+          width: 85%;
+          max-width: 460px;
           border-radius: 1.25rem;
           overflow: hidden;
           cursor: pointer;
-          box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+          box-shadow: 0 8px 40px rgba(0,0,0,0.22);
           will-change: transform, opacity;
         }
+        .parbin-photo-blur-bg {
+          position: absolute;
+          inset: 0;
+          background-size: cover;
+          background-position: center;
+          filter: blur(18px) brightness(0.72) saturate(1.3);
+          transform: scale(1.12);
+          z-index: 0;
+        }
         .parbin-photo-img {
+          position: relative;
+          z-index: 1;
           width: 100%;
-          height: 360px;
-          object-fit: cover;
+          height: auto;
+          max-height: 520px;
+          object-fit: contain;
           display: block;
         }
-        .parbin-photo-caption {
-          position: absolute;
-          bottom: 0; left: 0; right: 0;
-          background: linear-gradient(transparent, rgba(0,0,0,0.75));
-          padding: 2rem 1.5rem 1.25rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.2rem;
-        }
-        .parbin-caption-title { font-size: 1.05rem; font-weight: 700; color: #fff; }
-        .parbin-caption-desc  { font-size: 0.85rem; color: rgba(255,255,255,0.8); }
-        .parbin-caption-open  { font-size: 0.75rem; color: rgba(255,255,255,0.55); margin-top: 0.25rem; }
 
         .parbin-gallery-btn {
-          position: absolute;
+          position: static;
+          flex-shrink: 0;
           z-index: 20;
           background: rgba(255,255,255,0.9);
           border: 1px solid #d2d2d7;
@@ -519,8 +635,8 @@ const ParbinPage = () => {
           font-size: 0.9rem;
         }
         .parbin-gallery-btn:hover { background: #fff; transform: scale(1.08); }
-        .parbin-gallery-prev { left: 0; }
-        .parbin-gallery-next { right: 0; }
+        .parbin-gallery-prev { }
+        .parbin-gallery-next { }
 
         .parbin-gallery-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: -0.5rem; }
         .parbin-dot {
@@ -618,8 +734,24 @@ const ParbinPage = () => {
         /* ─── Responsive ─── */
         @media (max-width: 600px) {
           .parbin-hero { padding: 7rem 0 3rem; }
-          .parbin-gallery-wrapper { height: 300px; }
-          .parbin-photo-img { height: 260px; }
+          .parbin-gallery-inner {
+            min-height: 0;
+            max-width: 100%;
+          }
+          /* hide desktop side buttons, show bottom nav row */
+          .parbin-gallery-inner > .parbin-gallery-btn { display: none; }
+          .parbin-gallery-nav-row {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+          }
+          .parbin-gallery-stage {
+            min-height: 0;
+            width: 78vw;
+            height: 78vw;
+          }
+          .parbin-photo-card { width: 100%; max-width: 100%; }
+          .parbin-photo-img { max-height: 72vw; }
           .parbin-main-sections { padding: 3rem 1rem 4rem; gap: 4rem; }
         }
       `}</style>
