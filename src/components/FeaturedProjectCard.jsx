@@ -54,7 +54,7 @@ const FeaturedProjectCard = () => {
 
         <div className="flex gap-4">
           <a 
-            href="https://github.com/ParbinShrees" 
+            href="https://github.com/ParbinShrees/DUOPONG" 
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm font-semibold bg-[#0071e3] text-white px-6 py-2.5 hover:bg-[#0077ed] hover:scale-105 hover:shadow-[0_8px_20px_rgba(0,113,227,0.3)] active:scale-95 transition-all duration-300 rounded-full shadow-sm"
