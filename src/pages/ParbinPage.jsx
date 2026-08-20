@@ -118,7 +118,7 @@ const GallerySlider = () => {
               return (
                 <div
                   key={idx}
-                  className="parbin-photo-card"
+                  className={`parbin-photo-card${isActive ? ' active' : ''}`}
                   style={{
                     transform: `translateX(${translateX}%) scale(${scale}) rotate(${rotate}deg)`,
                     zIndex,
@@ -205,6 +205,9 @@ const ParbinPage = () => {
 
         {/* ── Hero Header ── */}
         <header className="parbin-hero">
+          <div className="parbin-aurora parbin-aurora-one" aria-hidden="true" />
+          <div className="parbin-aurora parbin-aurora-two" aria-hidden="true" />
+          <div className="parbin-hero-grid" aria-hidden="true" />
           <div className="parbin-container">
             <motion.span
               className="parbin-kicker"
@@ -730,6 +733,47 @@ const ParbinPage = () => {
           color: #86868b;
           line-height: 1.65;
         }
+
+        /* Electric visual refresh */
+        .parbin-page { --parbin-ink:#17213d; --parbin-muted:#5c6683; --parbin-violet:#7047eb; --parbin-cyan:#10b9de; --parbin-pink:#f35aa8; background:radial-gradient(circle at 8% 22%,rgba(112,71,235,.1),transparent 25rem),radial-gradient(circle at 92% 48%,rgba(16,185,222,.1),transparent 28rem),#f7f8ff; color:var(--parbin-ink); overflow:hidden; }
+        .parbin-hero { position:relative; isolation:isolate; overflow:hidden; background:linear-gradient(125deg,#f8f5ff 0%,#eafcff 48%,#fff4fb 100%); border-bottom-color:rgba(112,71,235,.14); }
+        .parbin-hero .parbin-container { position:relative; z-index:2; }
+        .parbin-aurora { position:absolute; z-index:-1; width:38rem; height:38rem; border-radius:50%; filter:blur(18px); opacity:.45; animation:parbin-float 13s ease-in-out infinite alternate; }
+        .parbin-aurora-one { top:-22rem; left:-10rem; background:radial-gradient(circle,#a37bff 0%,rgba(163,123,255,0) 68%); }
+        .parbin-aurora-two { right:-12rem; bottom:-25rem; background:radial-gradient(circle,#4ee0ed 0%,rgba(243,90,168,.2) 36%,rgba(78,224,237,0) 68%); animation-delay:-5s; }
+        .parbin-hero-grid { position:absolute; inset:0; z-index:-1; opacity:.32; background-image:linear-gradient(rgba(112,71,235,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,222,.08) 1px,transparent 1px); background-size:42px 42px; mask-image:linear-gradient(to bottom,black,transparent); }
+        .parbin-kicker { color:var(--parbin-violet); text-shadow:0 0 18px rgba(112,71,235,.18); }
+        .parbin-hero-title { color:var(--parbin-ink); background:linear-gradient(100deg,#252253 5%,#7047eb 42%,#ef5aa5 74%,#10b9de 105%); background-size:200% auto; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:parbin-gradient-shift 8s linear infinite; }
+        .parbin-hero-sub,.parbin-interest-desc,.parbin-spec-label { color:var(--parbin-muted); }
+        .parbin-bio-card,.parbin-setup-card,.parbin-interest-card { background:rgba(255,255,255,.78); border-color:rgba(112,71,235,.14); box-shadow:0 14px 40px rgba(64,49,118,.09); }
+        .parbin-bio-card { position:relative; overflow:hidden; transition:transform .35s ease,box-shadow .35s ease; }
+        .parbin-bio-card::before { content:''; position:absolute; width:12rem; height:12rem; top:-7rem; right:-5rem; border-radius:50%; background:radial-gradient(circle,rgba(243,90,168,.15),transparent 70%); pointer-events:none; }
+        .parbin-bio-card:hover { transform:translateY(-6px); box-shadow:0 22px 52px rgba(64,49,118,.15); }
+        .parbin-bio-card strong,.parbin-spec-icon { color:var(--parbin-violet); }
+        .parbin-tag { background:linear-gradient(135deg,rgba(112,71,235,.09),rgba(16,185,222,.1)); border-color:rgba(112,71,235,.18); color:#5041ae; transition:background .25s,transform .25s,box-shadow .25s; }
+        .parbin-tag:hover { background:linear-gradient(135deg,#7047eb,#10b9de); color:white; transform:translateY(-3px) rotate(-1deg); box-shadow:0 8px 16px rgba(112,71,235,.2); }
+        .parbin-setup-card:hover { transform:translateY(-8px) rotate(.35deg); box-shadow:0 24px 58px rgba(64,49,118,.18); }
+        .parbin-setup-img-wrap { background:#111127; }
+        .parbin-setup-img-bg { background:radial-gradient(ellipse at 20% 0%,#3b227b 0%,#151730 46%,#0e0e18 78%); }
+        .parbin-setup-title,.parbin-spec-val,.parbin-section-title,.parbin-interest-title { color:var(--parbin-ink); }
+        .parbin-setup-title-icon { background:linear-gradient(135deg,#eee7ff,#d8faff); color:var(--parbin-violet); }
+        .parbin-section-header { position:relative; border-bottom-color:rgba(112,71,235,.16); }
+        .parbin-section-header::after { content:''; position:absolute; bottom:-1px; left:0; width:6rem; height:2px; background:linear-gradient(90deg,var(--parbin-violet),var(--parbin-pink),var(--parbin-cyan)); border-radius:4px; }
+        .parbin-photo-card { border:1px solid rgba(255,255,255,.68); box-shadow:0 18px 50px rgba(46,32,95,.25); }
+        .parbin-photo-img { transition:transform .75s cubic-bezier(.2,.75,.25,1); }
+        .parbin-photo-card.active .parbin-photo-img { animation:parbin-image-breathe 7s ease-in-out infinite alternate; }
+        .parbin-photo-card:hover .parbin-photo-img { transform:scale(1.055); }
+        .parbin-gallery-btn { background:rgba(255,255,255,.78); backdrop-filter:blur(10px); border-color:rgba(112,71,235,.18); color:var(--parbin-violet); }
+        .parbin-gallery-btn:hover { background:linear-gradient(135deg,#7047eb,#10b9de); color:white; transform:scale(1.1); }
+        .parbin-dot.active { width:24px; border-radius:99px; background:linear-gradient(90deg,#7047eb,#10b9de); transform:none; }
+        .parbin-interest-card { position:relative; overflow:hidden; transition:box-shadow .3s,border-color .3s; }
+        .parbin-interest-card::before { content:''; position:absolute; inset:0 0 auto; height:3px; background:linear-gradient(90deg,var(--parbin-violet),var(--parbin-pink),var(--parbin-cyan)); transform:scaleX(.25); transform-origin:left; transition:transform .35s ease; }
+        .parbin-interest-card:hover { border-color:rgba(112,71,235,.32); box-shadow:0 20px 46px rgba(64,49,118,.14); }
+        .parbin-interest-card:hover::before { transform:scaleX(1); }
+        @keyframes parbin-float { from { transform:translate3d(-2rem,-1rem,0) scale(.94); } to { transform:translate3d(3rem,2rem,0) scale(1.08); } }
+        @keyframes parbin-gradient-shift { to { background-position:200% center; } }
+        @keyframes parbin-image-breathe { from { transform:scale(1); } to { transform:scale(1.035); } }
+        @media (prefers-reduced-motion:reduce) { .parbin-aurora,.parbin-hero-title,.parbin-photo-card.active .parbin-photo-img { animation:none; } .parbin-bio-card,.parbin-tag,.parbin-photo-img { transition:none; } }
 
         /* ─── Responsive ─── */
         @media (max-width: 600px) {
