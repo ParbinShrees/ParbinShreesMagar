@@ -71,10 +71,44 @@ const interests = [
 const GallerySlider = () => {
   const [current, setCurrent]     = useState(0);
   const [lightbox, setLightbox]   = useState(null);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
   const total = galleryPhotos.length;
 
-  const prev = useCallback(() => setCurrent(i => (i - 1 + total) % total), [total]);
-  const next = useCallback(() => setCurrent(i => (i + 1) % total), [total]);
+  const prev = useCallback(() => {
+    setCurrent(i => {
+      const nextIdx = (i - 1 + total) % total;
+      if (lightbox) setLightbox(galleryPhotos[nextIdx]);
+      return nextIdx;
+    });
+  }, [total, lightbox]);
+
+  const next = useCallback(() => {
+    setCurrent(i => {
+      const nextIdx = (i + 1) % total;
+      if (lightbox) setLightbox(galleryPhotos[nextIdx]);
+      return nextIdx;
+    });
+  }, [total, lightbox]);
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 45;
+    const isRightSwipe = distance < -45;
+    if (isLeftSwipe) next();
+    if (isRightSwipe) prev();
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
 
   // Keyboard nav
   useEffect(() => {
@@ -92,9 +126,14 @@ const GallerySlider = () => {
   return (
     <>
       {/* ── Slider ── */}
-      <div className="parbin-gallery-wrapper">
+      <div 
+        className="parbin-gallery-wrapper"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <div className="parbin-gallery-inner">
-          <button className="parbin-gallery-btn parbin-gallery-prev" onClick={prev} aria-label="Previous">
+          <button className="parbin-gallery-btn parbin-gallery-prev" onClick={prev} aria-label="Previous photo">
             <i className="fas fa-chevron-left" />
           </button>
 
@@ -137,9 +176,19 @@ const GallerySlider = () => {
             })}
           </div>
 
-          <button className="parbin-gallery-btn parbin-gallery-next" onClick={next} aria-label="Next">
+          <button className="parbin-gallery-btn parbin-gallery-next" onClick={next} aria-label="Next photo">
             <i className="fas fa-chevron-right" />
           </button>
+        </div>
+
+        {/* Counter Badge & Mobile Nav */}
+        <div className="flex items-center justify-between w-full max-w-[460px] px-4 mt-2">
+          <span className="text-xs font-bold text-[#86868b] bg-white px-3 py-1 rounded-full border border-[#d2d2d7] shadow-xs">
+            {current + 1} / {total}
+          </span>
+          <span className="text-[11px] font-semibold text-[#86868b] hidden sm:inline">
+            <i className="fas fa-expand-alt mr-1" /> Click image to enlarge
+          </span>
         </div>
 
         {/* Mobile-only nav row */}
@@ -177,16 +226,39 @@ const GallerySlider = () => {
           >
             <motion.div
               className="parbin-lightbox-inner"
-              initial={{ scale: 0.85, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.85, opacity: 0 }}
+              exit={{ scale: 0.9, opacity: 0 }}
               onClick={e => e.stopPropagation()}
             >
-              <button className="parbin-lightbox-close" onClick={() => setLightbox(null)}>
+              <button className="parbin-lightbox-close" onClick={() => setLightbox(null)} aria-label="Close fullscreen view">
                 <i className="fas fa-times" />
               </button>
-              <img src={lightbox.src} alt={lightbox.alt} className="parbin-lightbox-img" />
-              <p className="parbin-lightbox-caption">{lightbox.caption} — {lightbox.description}</p>
+
+              <div className="relative flex items-center justify-center">
+                <img src={lightbox.src} alt={lightbox.alt} className="parbin-lightbox-img" />
+                
+                {/* Lightbox nav arrows */}
+                <button 
+                  onClick={prev}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 backdrop-blur-md text-white border border-white/20 flex items-center justify-center hover:bg-black/80 transition-all cursor-pointer"
+                  aria-label="Previous in lightbox"
+                >
+                  <i className="fas fa-chevron-left" />
+                </button>
+                <button 
+                  onClick={next}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 backdrop-blur-md text-white border border-white/20 flex items-center justify-center hover:bg-black/80 transition-all cursor-pointer"
+                  aria-label="Next in lightbox"
+                >
+                  <i className="fas fa-chevron-right" />
+                </button>
+              </div>
+
+              <div className="p-4 bg-[#111] border-t border-white/10 flex items-center justify-between text-xs text-white/70">
+                <span>{lightbox.caption}</span>
+                <span className="font-mono bg-white/10 px-2 py-0.5 rounded">{current + 1} / {total}</span>
+              </div>
             </motion.div>
           </motion.div>
         )}
