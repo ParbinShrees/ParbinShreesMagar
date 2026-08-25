@@ -426,43 +426,44 @@ const ParbinPage = () => {
       {/* ── Page-scoped styles ── */}
       <style>{`
         /* ─── Layout ─── */
-        .parbin-page { background: #f5f5f7; min-height: 100vh; }
-        .parbin-container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+        .parbin-page { background: #fafafa; min-height: 100vh; font-family: var(--font-sans); }
+        .parbin-container { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
 
         /* ─── Hero ─── */
         .parbin-hero {
-          padding: 9rem 0 5rem;
-          background: linear-gradient(160deg, #ffffff 0%, #f0f4ff 100%);
-          border-bottom: 1px solid #d2d2d7;
+          padding: 8.5rem 0 4rem;
+          background: #ffffff;
+          border-bottom: 1px solid #e4e4e7;
           text-align: center;
         }
         .parbin-kicker {
           display: inline-block;
+          font-family: var(--font-mono);
           font-size: 0.75rem;
-          font-weight: 700;
-          letter-spacing: 0.18em;
+          font-weight: 600;
+          letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #0071e3;
-          margin-bottom: 1rem;
+          color: #71717a;
+          margin-bottom: 0.75rem;
         }
         .parbin-hero-title {
-          font-size: clamp(2.8rem, 6vw, 5rem);
+          font-size: clamp(2.4rem, 5vw, 4rem);
           font-weight: 800;
-          color: #1d1d1f;
+          color: #09090b;
           letter-spacing: -0.03em;
-          line-height: 1.1;
-          margin-bottom: 1.25rem;
+          line-height: 1.15;
+          margin-bottom: 1rem;
         }
         .parbin-hero-sub {
-          font-size: 1.2rem;
-          color: #86868b;
-          max-width: 640px;
+          font-size: 1.1rem;
+          color: #71717a;
+          max-width: 600px;
           margin: 0 auto;
-          line-height: 1.7;
+          line-height: 1.65;
         }
 
         /* ─── Main sections container ─── */
-        .parbin-main-sections { padding: 5rem 1.5rem 6rem; display: flex; flex-direction: column; gap: 6rem; }
+        .parbin-main-sections { padding: 4rem 1.5rem 6rem; display: flex; flex-direction: column; gap: 5rem; }
 
         /* ─── Story grid ─── */
         .parbin-story-grid {
@@ -475,36 +476,37 @@ const ParbinPage = () => {
         /* Bio card */
         .parbin-bio-card {
           background: #ffffff;
-          border: 1px solid #d2d2d7;
-          border-radius: 1.5rem;
-          padding: 2.5rem;
+          border: 1px solid #e4e4e7;
+          border-radius: 1rem;
+          padding: 2rem;
           display: flex;
           flex-direction: column;
           gap: 1.25rem;
-          font-size: 1rem;
-          line-height: 1.75;
-          color: #1d1d1f;
-          box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+          font-size: 0.95rem;
+          line-height: 1.7;
+          color: #3f3f46;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.03);
         }
-        .parbin-bio-card strong { color: #0071e3; }
+        .parbin-bio-card strong { color: #09090b; }
 
         /* Tags */
-        .parbin-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem; }
+        .parbin-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
         .parbin-tag {
           display: inline-flex;
           align-items: center;
-          gap: 0.45rem;
-          background: #f0f6ff;
-          border: 1px solid #bcd4f8;
-          color: #0055b3;
-          border-radius: 99px;
-          padding: 0.4rem 0.85rem;
-          font-size: 0.82rem;
-          font-weight: 600;
-          transition: background 0.2s, transform 0.2s;
+          gap: 0.4rem;
+          background: #f4f4f5;
+          border: 1px solid #e4e4e7;
+          color: #27272a;
+          border-radius: 6px;
+          padding: 0.3rem 0.65rem;
+          font-size: 0.75rem;
+          font-family: var(--font-mono);
+          font-weight: 500;
+          transition: background 0.15s;
         }
-        .parbin-tag:hover { background: #dceeff; transform: translateY(-2px); }
-        .parbin-tag i { font-size: 0.8rem; }
+        .parbin-tag:hover { background: #e4e4e7; }
+        .parbin-tag i { font-size: 0.75rem; color: #71717a; }
 
         /* ── Setup card ── */
         .parbin-setup-card {

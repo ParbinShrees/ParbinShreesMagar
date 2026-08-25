@@ -9,7 +9,7 @@ const Navbar = () => {
   const location = useLocation();
   const isHome = location.pathname === '/';
 
-  // Handle hash scrolling after page load if navigating from another route
+  // Handle hash scrolling
   useEffect(() => {
     if (location.hash) {
       setTimeout(() => {
@@ -23,14 +23,14 @@ const Navbar = () => {
     }
   }, [location]);
 
-  // Scroll listener for sticky styling & active section scroll-spy
+  // Scroll listener for sticky background & active section
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
+      setIsScrolled(window.scrollY > 20);
 
       if (isHome) {
-        const sections = ['home', 'about', 'skills', 'projects', 'contact'];
-        const scrollPosition = window.scrollY + 180;
+        const sections = ['home', 'about', 'projects', 'skills', 'contact'];
+        const scrollPosition = window.scrollY + 200;
 
         for (let i = sections.length - 1; i >= 0; i--) {
           const section = document.getElementById(sections[i]);
@@ -48,103 +48,95 @@ const Navbar = () => {
   }, [isHome]);
 
   const navLinks = [
-    { name: 'Home', href: '#home', id: 'home', isHash: true },
     { name: 'About', href: '#about', id: 'about', isHash: true },
-    { name: 'Skills', href: '#skills', id: 'skills', isHash: true },
     { name: 'Projects', href: '#projects', id: 'projects', isHash: true },
+    { name: 'Skills', href: '#skills', id: 'skills', isHash: true },
     { name: 'Contact', href: '#contact', id: 'contact', isHash: true },
     { name: 'Behind the Code', href: '/parbin', isRoute: true },
   ];
 
   const isLinkActive = (link) => {
-    if (link.isRoute) {
-      return location.pathname === link.href;
-    }
+    if (link.isRoute) return location.pathname === link.href;
     return isHome && activeSection === link.id;
   };
 
-  const renderLink = (link, baseClass, onClick) => {
-    const active = isLinkActive(link);
-    const classes = `${baseClass} ${active ? 'text-[#0071e3] font-bold bg-[#0071e3]/10 md:bg-transparent' : 'text-[#1d1d1f] hover:text-[#0071e3]'}`;
-
-    if (link.isRoute) {
-      return (
-        <Link 
-          key={link.name} 
-          to={link.href} 
-          className={classes}
-          aria-current={active ? 'page' : undefined}
-          onClick={onClick}
-        >
-          {link.name}
-        </Link>
-      );
-    }
-    
-    const targetPath = isHome ? link.href : `/${link.href}`;
-    return (
-      <Link 
-        key={link.name} 
-        to={targetPath}
-        className={classes}
-        aria-current={active ? 'page' : undefined}
-        onClick={(e) => {
-          if (isHome) {
-            e.preventDefault();
-            const element = document.getElementById(link.id);
-            if (element) element.scrollIntoView({ behavior: 'smooth' });
-          }
-          if (onClick) onClick();
-        }}
-      >
-        {link.name}
-      </Link>
-    );
-  };
-
   return (
-    <nav 
-      className={`fixed w-full z-50 transition-all duration-300 ${
+    <header 
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-200 ${
         isScrolled 
-          ? 'bg-white/80 backdrop-blur-xl shadow-[0_2px_20px_rgba(0,0,0,0.06)] py-3.5 border-b border-[#d2d2d7]/60' 
+          ? 'bg-white/85 backdrop-blur-md border-b border-zinc-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] py-3.5' 
           : 'bg-transparent py-5'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
+      <div className="max-w-5xl mx-auto px-6 flex justify-between items-center">
         
-        {/* Brand Logo */}
-        <Link to="/" className="hover:opacity-85 hover:scale-105 transition-all duration-300 flex items-center gap-3">
-          <img src={logoImg} alt="Parbin Shrees Magar Logo" className="h-9 w-auto object-contain" />
-          <span className="font-bold text-sm tracking-tight text-[#1d1d1f] hidden sm:inline">
-            Parbin<span className="text-[#0071e3]">.dev</span>
+        {/* Brand / Logo */}
+        <Link 
+          to="/" 
+          className="flex items-center gap-2.5 text-zinc-900 hover:opacity-75 transition-opacity"
+        >
+          <img src={logoImg} alt="Parbin" className="h-8 w-auto object-contain" />
+          <span className="font-semibold text-sm tracking-tight">
+            Parbin Shrees
           </span>
         </Link>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-7 bg-white/70 backdrop-blur-md px-5 py-2 rounded-full border border-[#d2d2d7]/70 shadow-sm">
-          {navLinks.map((link) => 
-            renderLink(link, "font-semibold text-xs uppercase tracking-wider transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0071e3] rounded-full px-2.5 py-1")
-          )}
-        </div>
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-1 bg-zinc-100/80 backdrop-blur-sm p-1 rounded-full border border-zinc-200/80">
+          {navLinks.map((link) => {
+            const active = isLinkActive(link);
+            const classes = `text-xs font-medium px-3.5 py-1.5 rounded-full transition-all duration-150 ${
+              active 
+                ? 'bg-white text-zinc-900 shadow-xs font-semibold' 
+                : 'text-zinc-600 hover:text-zinc-950'
+            }`;
+
+            if (link.isRoute) {
+              return (
+                <Link key={link.name} to={link.href} className={classes}>
+                  {link.name}
+                </Link>
+              );
+            }
+
+            const targetPath = isHome ? link.href : `/${link.href}`;
+            return (
+              <Link 
+                key={link.name} 
+                to={targetPath}
+                className={classes}
+                onClick={(e) => {
+                  if (isHome) {
+                    e.preventDefault();
+                    const el = document.getElementById(link.id);
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
+        </nav>
 
         {/* Action Button */}
         <div className="hidden md:flex items-center gap-3">
           <a
             href="mailto:parbinshreesh64487@gmail.com"
-            className="text-xs font-bold bg-[#0071e3] text-white px-4 py-2 rounded-full hover:bg-[#0077ed] hover:scale-105 active:scale-95 transition-all shadow-sm flex items-center gap-1.5"
+            className="text-xs font-medium text-zinc-900 bg-white hover:bg-zinc-50 border border-zinc-200 px-3.5 py-1.5 rounded-full shadow-xs hover:border-zinc-300 transition-all flex items-center gap-1.5"
           >
-            <i className="fas fa-paper-plane text-[10px]" />
-            Say Hello
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            Get in touch
           </a>
         </div>
 
-        {/* Mobile Nav Toggle */}
+        {/* Mobile Toggle */}
         <button 
-          className="md:hidden text-[#1d1d1f] p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0071e3] rounded-xl hover:bg-black/5"
+          className="md:hidden text-zinc-700 p-1.5 hover:bg-zinc-100 rounded-lg transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle navigation menu"
+          aria-label="Toggle Menu"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {isMobileMenuOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             ) : (
@@ -154,28 +146,59 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Nav Menu */}
+      {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-2xl border-b border-[#d2d2d7] shadow-xl flex flex-col py-5 px-6 gap-2 animate-in slide-in-from-top-2 duration-200">
-          {navLinks.map((link) => 
-            renderLink(
-              link, 
-              "text-base font-semibold transition-colors w-full py-2.5 px-4 rounded-xl", 
-              () => setIsMobileMenuOpen(false)
-            )
-          )}
-          <div className="pt-3 border-t border-[#d2d2d7]/60 mt-2 flex flex-col gap-2">
+        <div className="md:hidden bg-white/95 backdrop-blur-xl border-b border-zinc-200 px-6 py-4 flex flex-col gap-1 shadow-lg">
+          {navLinks.map((link) => {
+            const active = isLinkActive(link);
+            const classes = `text-sm font-medium py-2 px-3 rounded-lg transition-colors ${
+              active ? 'bg-zinc-100 text-zinc-950 font-semibold' : 'text-zinc-600 hover:bg-zinc-50'
+            }`;
+
+            if (link.isRoute) {
+              return (
+                <Link 
+                  key={link.name} 
+                  to={link.href} 
+                  className={classes}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              );
+            }
+
+            const targetPath = isHome ? link.href : `/${link.href}`;
+            return (
+              <Link 
+                key={link.name} 
+                to={targetPath}
+                className={classes}
+                onClick={(e) => {
+                  setIsMobileMenuOpen(false);
+                  if (isHome) {
+                    e.preventDefault();
+                    const el = document.getElementById(link.id);
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
+          <div className="pt-2 mt-2 border-t border-zinc-100">
             <a
               href="mailto:parbinshreesh64487@gmail.com"
-              className="text-center font-bold text-sm bg-[#0071e3] text-white py-3 rounded-xl shadow-sm"
+              className="text-center block text-xs font-semibold bg-zinc-900 text-white py-2.5 rounded-lg"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Get in Touch
+              parbinshreesh64487@gmail.com
             </a>
           </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 };
 

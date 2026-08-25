@@ -23,50 +23,47 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
   return (
     <AnimatePresence>
       <div 
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm"
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/50 backdrop-blur-xs"
         onClick={onClose}
       >
         <motion.div
-          initial={{ opacity: 0, scale: 0.94, y: 20 }}
+          initial={{ opacity: 0, scale: 0.96, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.94, y: 20 }}
-          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-[#d2d2d7] relative flex flex-col"
+          exit={{ opacity: 0, scale: 0.96, y: 10 }}
+          transition={{ duration: 0.2 }}
+          className="bg-white rounded-2xl max-w-2xl w-full max-h-[88vh] overflow-y-auto shadow-xl border border-zinc-200 relative flex flex-col"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/80 backdrop-blur-md border border-[#d2d2d7] text-[#1d1d1f] flex items-center justify-center hover:bg-[#f5f5f7] hover:scale-105 active:scale-95 transition-all shadow-sm"
+            className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/90 border border-zinc-200 text-zinc-600 hover:text-zinc-950 flex items-center justify-center hover:bg-zinc-100 transition-colors"
             aria-label="Close modal"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <i className="fas fa-times text-xs" />
           </button>
 
           {/* Project Image Banner */}
           {project.imageUrl && (
-            <div className="w-full h-64 sm:h-72 bg-[#f5f5f7] relative overflow-hidden border-b border-[#d2d2d7] flex-shrink-0">
+            <div className="w-full h-56 sm:h-64 bg-zinc-100 relative overflow-hidden border-b border-zinc-200 flex-shrink-0">
               <img
                 src={project.imageUrl}
                 alt={project.title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-              <span className="absolute bottom-4 left-6 bg-white/90 backdrop-blur-md text-[#1d1d1f] text-xs font-semibold px-3.5 py-1.5 rounded-full uppercase tracking-wider shadow-sm border border-white/40">
-                {project.category}
-              </span>
             </div>
           )}
 
-          {/* Modal Body */}
+          {/* Modal Content */}
           <div className="p-6 sm:p-8 space-y-6">
             <div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-[#1d1d1f] tracking-tight mb-2">
+              <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider block mb-1">
+                {project.category}
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold text-zinc-950 tracking-tight mb-2">
                 {project.title}
               </h3>
-              <p className="text-base text-[#86868b] font-medium leading-relaxed">
+              <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
                 {project.fullDescription || project.description}
               </p>
             </div>
@@ -74,15 +71,13 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
             {/* Key Features */}
             {project.features && project.features.length > 0 && (
               <div>
-                <h4 className="text-sm font-bold text-[#1d1d1f] uppercase tracking-wider mb-3">
-                  Key Highlights & Architecture
+                <h4 className="text-xs font-mono font-bold text-zinc-900 uppercase tracking-wider mb-2.5">
+                  Key Technical Details
                 </h4>
-                <ul className="space-y-2.5">
+                <ul className="space-y-2">
                   {project.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2.5 text-sm text-[#1d1d1f] font-medium">
-                      <span className="flex-shrink-0 w-5 h-5 rounded-full bg-[#0071e3]/10 text-[#0071e3] flex items-center justify-center text-xs mt-0.5">
-                        <i className="fas fa-check text-[10px]" />
-                      </span>
+                    <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-zinc-600">
+                      <span className="text-zinc-400 mt-0.5">•</span>
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -90,16 +85,16 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
               </div>
             )}
 
-            {/* Technologies */}
+            {/* Tech Stack */}
             <div>
-              <h4 className="text-sm font-bold text-[#1d1d1f] uppercase tracking-wider mb-3">
-                Tech Stack
+              <h4 className="text-xs font-mono font-bold text-zinc-900 uppercase tracking-wider mb-2.5">
+                Technologies Used
               </h4>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs font-semibold bg-[#f5f5f7] px-3 py-1.5 text-[#1d1d1f] rounded-full border border-[#d2d2d7]"
+                    className="text-xs font-mono bg-zinc-100 px-2.5 py-1 text-zinc-700 rounded border border-zinc-200"
                   >
                     {tag}
                   </span>
@@ -108,16 +103,16 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap gap-3 pt-4 border-t border-[#d2d2d7]">
+            <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-zinc-100">
               {project.demoUrl && project.demoUrl !== '#' && project.demoUrl !== '' && (
                 <a
                   href={project.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm font-semibold bg-[#0071e3] text-white px-5 py-2.5 rounded-full hover:bg-[#0077ed] hover:scale-105 active:scale-95 transition-all shadow-sm"
+                  className="text-xs font-semibold bg-zinc-900 text-white px-4 py-2 rounded-lg hover:bg-zinc-800 transition-colors flex items-center gap-1.5"
                 >
-                  <i className="fas fa-external-link-alt text-xs" />
-                  Live Preview
+                  <i className="fas fa-external-link-alt text-[10px]" />
+                  Visit Live Demo
                 </a>
               )}
               {project.repoUrl && project.repoUrl !== '#' && (
@@ -125,20 +120,22 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                   href={project.repoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm font-semibold bg-[#1d1d1f] text-white px-5 py-2.5 rounded-full hover:bg-[#333336] hover:scale-105 active:scale-95 transition-all shadow-sm"
+                  className="text-xs font-semibold text-zinc-700 bg-white hover:bg-zinc-50 border border-zinc-200 px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5"
                 >
-                  <i className="fab fa-github text-sm" />
-                  Source Code
+                  <i className="fab fa-github" />
+                  GitHub Repository
                 </a>
               )}
               <button
                 onClick={onClose}
-                className="text-sm font-semibold border border-[#d2d2d7] text-[#1d1d1f] bg-transparent px-5 py-2.5 rounded-full hover:bg-[#f5f5f7] active:scale-95 transition-all ml-auto cursor-pointer"
+                className="text-xs font-medium text-zinc-500 hover:text-zinc-900 px-3 py-2 transition-colors ml-auto cursor-pointer"
               >
                 Close
               </button>
             </div>
+
           </div>
+
         </motion.div>
       </div>
     </AnimatePresence>

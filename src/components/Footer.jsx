@@ -7,72 +7,29 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#f5f5f7] border-t border-[#d2d2d7] py-14 text-center text-[#86868b]">
-      <div className="max-w-6xl mx-auto px-6 flex flex-col items-center">
+    <footer className="border-t border-zinc-200/80 py-12 bg-white text-zinc-500 text-xs">
+      <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
         
-        {/* Brand */}
-        <div className="flex items-center gap-2 mb-4">
-          <span className="font-extrabold text-xl tracking-tight text-[#1d1d1f]">
-            Parbin Shrees Magar
-          </span>
-        </div>
-        
-        <p className="text-xs font-semibold text-[#86868b] uppercase tracking-wider mb-6">
-          Full-Stack Developer · Embedded Systems Enthusiast
-        </p>
-
-        {/* Quick Nav Links */}
-        <div className="flex flex-wrap justify-center gap-6 mb-8 text-xs font-semibold text-[#1d1d1f]">
-          <Link to="/" className="hover:text-[#0071e3] transition-colors">Home</Link>
-          <a href="/#about" className="hover:text-[#0071e3] transition-colors">About</a>
-          <a href="/#skills" className="hover:text-[#0071e3] transition-colors">Skills</a>
-          <a href="/#projects" className="hover:text-[#0071e3] transition-colors">Projects</a>
-          <a href="/#contact" className="hover:text-[#0071e3] transition-colors">Contact</a>
-          <Link to="/parbin" className="hover:text-[#0071e3] transition-colors">Behind the Code</Link>
+        <div>
+          <p className="font-semibold text-zinc-900 mb-0.5">Parbin Shrees Magar</p>
+          <p className="text-zinc-500 font-mono">Full-Stack &amp; Embedded Systems</p>
         </div>
 
-        {/* Social Icons */}
-        <div className="flex gap-4 mb-8">
-          <a 
-            href="https://github.com/ParbinShrees" 
-            className="w-10 h-10 rounded-full bg-white border border-[#d2d2d7] flex items-center justify-center text-[#1d1d1f] hover:text-[#0071e3] hover:scale-110 shadow-xs transition-all"
-            target="_blank" 
-            rel="noopener noreferrer"
-            title="GitHub"
-          >
-            <i className="fab fa-github text-base" />
-          </a>
-          <a 
-            href="https://www.linkedin.com/in/parbin-shrees-6a32a2330/" 
-            className="w-10 h-10 rounded-full bg-white border border-[#d2d2d7] flex items-center justify-center text-[#1d1d1f] hover:text-[#0071e3] hover:scale-110 shadow-xs transition-all"
-            target="_blank" 
-            rel="noopener noreferrer"
-            title="LinkedIn"
-          >
-            <i className="fab fa-linkedin-in text-base" />
-          </a>
-          <a 
-            href="mailto:parbinshreesh64487@gmail.com" 
-            className="w-10 h-10 rounded-full bg-white border border-[#d2d2d7] flex items-center justify-center text-[#1d1d1f] hover:text-[#0071e3] hover:scale-110 shadow-xs transition-all"
-            title="Email"
-          >
-            <i className="fas fa-envelope text-base" />
-          </a>
+        <div className="flex flex-wrap items-center gap-5 font-medium text-zinc-600">
+          <Link to="/" className="hover:text-zinc-950 transition-colors">Home</Link>
+          <a href="/#about" className="hover:text-zinc-950 transition-colors">About</a>
+          <a href="/#projects" className="hover:text-zinc-950 transition-colors">Projects</a>
+          <a href="/#skills" className="hover:text-zinc-950 transition-colors">Skills</a>
+          <a href="/#contact" className="hover:text-zinc-950 transition-colors">Contact</a>
+          <Link to="/parbin" className="hover:text-zinc-950 transition-colors">Behind the Code</Link>
         </div>
 
-        {/* Bottom copyright + Back to top */}
-        <div className="flex flex-col sm:flex-row items-center justify-between w-full pt-8 border-t border-[#d2d2d7]/60 text-xs font-medium gap-4">
-          <p className="text-[#86868b]">
-            © {new Date().getFullYear()} Parbin Shrees Magar. Designed with care &amp; precision.
-          </p>
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-1.5 text-[#1d1d1f] hover:text-[#0071e3] transition-colors cursor-pointer"
-          >
-            <span>Back to top</span>
-            <i className="fas fa-arrow-up text-[10px]" />
-          </button>
-        </div>
+        <button
+          onClick={scrollToTop}
+          className="font-mono text-zinc-400 hover:text-zinc-900 transition-colors cursor-pointer"
+        >
+          ↑ Top
+        </button>
 
       </div>
     </footer>
