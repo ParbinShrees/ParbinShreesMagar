@@ -23,21 +23,21 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
   return (
     <AnimatePresence>
       <div 
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/50 backdrop-blur-xs"
+        className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/60 backdrop-blur-xs"
         onClick={onClose}
       >
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.96, y: 10 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 30 }}
           transition={{ duration: 0.2 }}
-          className="bg-white rounded-2xl max-w-2xl w-full max-h-[88vh] overflow-y-auto shadow-xl border border-zinc-200 relative flex flex-col"
+          className="bg-white rounded-t-2xl sm:rounded-2xl max-w-2xl w-full max-h-[88vh] sm:max-h-[85vh] overflow-y-auto shadow-2xl border border-zinc-200 relative flex flex-col"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/90 border border-zinc-200 text-zinc-600 hover:text-zinc-950 flex items-center justify-center hover:bg-zinc-100 transition-colors"
+            className="absolute top-3.5 right-3.5 z-20 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm border border-zinc-200 text-zinc-600 hover:text-zinc-950 flex items-center justify-center hover:bg-zinc-100 transition-colors shadow-xs"
             aria-label="Close modal"
           >
             <i className="fas fa-times text-xs" />
@@ -45,7 +45,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
           {/* Project Image Banner */}
           {project.imageUrl && (
-            <div className="w-full h-56 sm:h-64 bg-zinc-100 relative overflow-hidden border-b border-zinc-200 flex-shrink-0">
+            <div className="w-full h-48 sm:h-60 bg-zinc-100 relative overflow-hidden border-b border-zinc-200 flex-shrink-0">
               <img
                 src={project.imageUrl}
                 alt={project.title}
@@ -55,7 +55,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
           )}
 
           {/* Modal Content */}
-          <div className="p-6 sm:p-8 space-y-6">
+          <div className="p-5 sm:p-8 space-y-5">
             <div>
               <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider block mb-1">
                 {project.category}
@@ -71,7 +71,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
             {/* Key Features */}
             {project.features && project.features.length > 0 && (
               <div>
-                <h4 className="text-xs font-mono font-bold text-zinc-900 uppercase tracking-wider mb-2.5">
+                <h4 className="text-xs font-mono font-bold text-zinc-900 uppercase tracking-wider mb-2">
                   Key Technical Details
                 </h4>
                 <ul className="space-y-2">
@@ -87,7 +87,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
             {/* Tech Stack */}
             <div>
-              <h4 className="text-xs font-mono font-bold text-zinc-900 uppercase tracking-wider mb-2.5">
+              <h4 className="text-xs font-mono font-bold text-zinc-900 uppercase tracking-wider mb-2">
                 Technologies Used
               </h4>
               <div className="flex flex-wrap gap-1.5">
@@ -103,13 +103,13 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-zinc-100">
+            <div className="flex flex-wrap items-center gap-2.5 pt-4 border-t border-zinc-100">
               {project.demoUrl && project.demoUrl !== '#' && project.demoUrl !== '' && (
                 <a
                   href={project.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-semibold bg-zinc-900 text-white px-4 py-2 rounded-lg hover:bg-zinc-800 transition-colors flex items-center gap-1.5"
+                  className="text-xs font-semibold bg-zinc-900 text-white px-4 py-2.5 rounded-lg hover:bg-zinc-800 transition-colors flex items-center gap-1.5 flex-1 sm:flex-initial justify-center"
                 >
                   <i className="fas fa-external-link-alt text-[10px]" />
                   Visit Live Demo
@@ -120,7 +120,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                   href={project.repoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-semibold text-zinc-700 bg-white hover:bg-zinc-50 border border-zinc-200 px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5"
+                  className="text-xs font-semibold text-zinc-700 bg-white hover:bg-zinc-50 border border-zinc-200 px-4 py-2.5 rounded-lg transition-colors flex items-center gap-1.5 flex-1 sm:flex-initial justify-center"
                 >
                   <i className="fab fa-github" />
                   GitHub Repository

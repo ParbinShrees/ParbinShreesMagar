@@ -9,11 +9,11 @@ import PageTransition from '../components/PageTransition';
 const Home = () => {
   return (
     <PageTransition>
-      <div className="pt-24">
+      <div>
         <Hero />
         <About />
-        <Skills />
         <Projects />
+        <Skills />
         <Contact />
       </div>
     </PageTransition>

@@ -847,8 +847,17 @@ const ParbinPage = () => {
         @media (prefers-reduced-motion:reduce) { .parbin-aurora,.parbin-hero-title,.parbin-photo-card.active .parbin-photo-img { animation:none; } .parbin-bio-card,.parbin-tag,.parbin-photo-img { transition:none; } }
 
         /* ─── Responsive ─── */
-        @media (max-width: 600px) {
-          .parbin-hero { padding: 7rem 0 3rem; }
+        @media (max-width: 640px) {
+          .parbin-hero { padding: 5.5rem 1rem 2.5rem; }
+          .parbin-hero-title { font-size: 2.25rem; }
+          .parbin-hero-sub { font-size: 0.95rem; }
+          .parbin-main-sections { padding: 2rem 1rem 4rem; gap: 3.5rem; }
+          .parbin-bio-card { padding: 1.5rem; font-size: 0.9rem; }
+          .parbin-setup-img-wrap { padding: 1rem 1rem 0; }
+          .parbin-setup-img { max-height: 240px; }
+          .parbin-setup-title { padding: 1rem 1.25rem 0.75rem; font-size: 0.9rem; }
+          .parbin-spec-list { padding: 0.25rem 1.25rem 1rem; }
+          .parbin-spec-row { padding: 0.6rem 0; font-size: 0.8rem; }
           .parbin-gallery-inner {
             min-height: 0;
             max-width: 100%;
@@ -857,17 +866,18 @@ const ParbinPage = () => {
           .parbin-gallery-inner > .parbin-gallery-btn { display: none; }
           .parbin-gallery-nav-row {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             justify-content: center;
+            margin-top: 0.5rem;
           }
           .parbin-gallery-stage {
             min-height: 0;
-            width: 78vw;
-            height: 78vw;
+            width: 82vw;
+            height: 82vw;
           }
           .parbin-photo-card { width: 100%; max-width: 100%; }
-          .parbin-photo-img { max-height: 72vw; }
-          .parbin-main-sections { padding: 3rem 1rem 4rem; gap: 4rem; }
+          .parbin-photo-img { max-height: 76vw; }
+          .parbin-interest-card { padding: 1.5rem; }
         }
       `}</style>
     </PageTransition>

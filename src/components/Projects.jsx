@@ -69,7 +69,7 @@ const Projects = () => {
 
   const filterTabs = [
     { key: 'all', label: 'All Work' },
-    { key: 'web', label: 'Web Applications' },
+    { key: 'web', label: 'Web Apps' },
     { key: 'hardware', label: 'Hardware & Arduino' },
     { key: 'systems', label: 'Desktop & Systems' },
   ];
@@ -79,11 +79,11 @@ const Projects = () => {
     : projectsData.filter(p => p.filterType === activeFilter);
 
   return (
-    <section id="projects" className="py-20 border-t border-zinc-200/80">
-      <div className="max-w-5xl mx-auto px-6">
+    <section id="projects" className="py-14 sm:py-20 border-t border-zinc-200/80">
+      <div className="max-w-5xl mx-auto px-5 sm:px-6">
         
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+        {/* Header & Filter */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-10 gap-4">
           <div>
             <span className="text-xs font-mono font-medium text-zinc-500 uppercase tracking-wider block mb-1">
               02 / Projects
@@ -93,13 +93,13 @@ const Projects = () => {
             </h2>
           </div>
 
-          {/* Filter Tabs */}
-          <div className="flex flex-wrap gap-1 bg-zinc-100 p-1 rounded-lg border border-zinc-200 self-start sm:self-auto">
+          {/* Filter Tabs (Horizontal scroll on very small screens, wraps cleanly) */}
+          <div className="flex items-center gap-1 bg-zinc-100 p-1 rounded-lg border border-zinc-200 overflow-x-auto max-w-full">
             {filterTabs.map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setActiveFilter(tab.key)}
-                className={`text-xs font-medium px-3 py-1.5 rounded-md transition-all duration-150 cursor-pointer ${
+                className={`text-xs font-medium px-3 py-1.5 rounded-md transition-all duration-150 cursor-pointer whitespace-nowrap flex-shrink-0 ${
                   activeFilter === tab.key
                     ? 'bg-white text-zinc-950 font-semibold shadow-xs'
                     : 'text-zinc-500 hover:text-zinc-900'
@@ -113,14 +113,14 @@ const Projects = () => {
 
         {/* Featured Hardware Project (Shown for All or Hardware) */}
         {(activeFilter === 'all' || activeFilter === 'hardware') && (
-          <div className="mb-8">
+          <div className="mb-6 sm:mb-8">
             <FeaturedProjectCard onOpenModal={setSelectedProject} />
           </div>
         )}
 
         {/* Project Grid */}
         {filteredProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {filteredProjects.map((project) => (
               <ProjectCard 
                 key={project.id} 
@@ -131,7 +131,7 @@ const Projects = () => {
           </div>
         ) : (
           activeFilter === 'hardware' ? null : (
-            <p className="text-center text-zinc-500 text-sm py-12">
+            <p className="text-center text-zinc-500 text-sm py-8">
               No projects in this category.
             </p>
           )

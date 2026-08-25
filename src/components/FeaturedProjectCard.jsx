@@ -27,7 +27,7 @@ const FeaturedProjectCard = ({ onOpenModal }) => {
         
         {/* Photo */}
         <div 
-          className="lg:col-span-6 bg-zinc-100 min-h-[280px] lg:min-h-[360px] relative overflow-hidden border-b lg:border-b-0 lg:border-r border-zinc-200 cursor-pointer group"
+          className="lg:col-span-6 bg-zinc-100 aspect-[16/10] sm:aspect-[4/3] lg:aspect-auto lg:min-h-[340px] relative overflow-hidden border-b lg:border-b-0 lg:border-r border-zinc-200 cursor-pointer group"
           onClick={() => onOpenModal && onOpenModal(duoPongData)}
         >
           <img 
@@ -38,52 +38,52 @@ const FeaturedProjectCard = ({ onOpenModal }) => {
               e.target.style.display = 'none';
             }}
           />
-          <div className="absolute top-4 left-4">
-            <span className="text-[11px] font-mono font-semibold bg-zinc-900/80 text-white backdrop-blur-md px-2.5 py-1 rounded-md">
+          <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4">
+            <span className="text-[11px] font-mono font-semibold bg-zinc-900/85 text-white backdrop-blur-md px-2.5 py-1 rounded-md shadow-xs">
               Featured Build
             </span>
           </div>
         </div>
 
         {/* Content */}
-        <div className="lg:col-span-6 p-7 lg:p-8 flex flex-col justify-between space-y-6">
+        <div className="lg:col-span-6 p-5 sm:p-7 lg:p-8 flex flex-col justify-between space-y-5">
           <div>
-            <div className="flex items-center gap-2 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2">
+            <div className="flex items-center gap-2 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-1.5">
               <span>Arduino · Embedded Systems</span>
             </div>
 
-            <h3 className="text-2xl font-bold tracking-tight text-zinc-950 mb-3">
+            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 mb-2.5">
               DuoPong Arcade Machine
             </h3>
 
-            <p className="text-zinc-600 text-sm sm:text-base leading-relaxed mb-6">
+            <p className="text-zinc-600 text-sm sm:text-base leading-relaxed mb-4 sm:mb-5">
               A physical two-player table tennis machine that brings digital Pong into the real world. Built with Arduino, infrared scoring sensors, a 16x2 I2C LCD screen, and an automated flap return mechanism that plays like a genuine arcade duel.
             </p>
 
-            <div className="flex flex-wrap gap-1.5 mb-6">
-              {['Arduino (C/C++)', 'IR Sensors', 'Servos', 'I2C LCD', 'Serial Telemetry'].map(tag => (
-                <span key={tag} className="text-xs font-mono bg-zinc-100 text-zinc-700 px-2.5 py-1 rounded-md border border-zinc-200">
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              {['Arduino (C/C++)', 'IR Sensors', 'Servos', 'I2C LCD', 'Serial Comms'].map(tag => (
+                <span key={tag} className="text-xs font-mono bg-zinc-100 text-zinc-700 px-2 py-0.5 rounded border border-zinc-200">
                   {tag}
                 </span>
               ))}
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-zinc-100">
+          <div className="flex flex-wrap items-center gap-2.5 pt-3 sm:pt-4 border-t border-zinc-100">
             <a 
               href="https://github.com/ParbinShrees/DUOPONG" 
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-semibold bg-zinc-900 text-white px-4 py-2 rounded-lg hover:bg-zinc-800 transition-colors flex items-center gap-1.5"
+              className="text-xs font-semibold bg-zinc-900 text-white px-4 py-2.5 rounded-lg hover:bg-zinc-800 transition-colors flex items-center gap-1.5 flex-1 sm:flex-initial justify-center"
             >
               <i className="fab fa-github" />
-              GitHub Repository
+              GitHub Repo
             </a>
 
             <button 
               type="button"
               onClick={() => onOpenModal && onOpenModal(duoPongData)}
-              className="text-xs font-semibold text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 px-4 py-2 rounded-lg transition-colors cursor-pointer"
+              className="text-xs font-semibold text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 px-4 py-2.5 rounded-lg transition-colors cursor-pointer flex-1 sm:flex-initial text-center justify-center"
             >
               Technical Specs
             </button>

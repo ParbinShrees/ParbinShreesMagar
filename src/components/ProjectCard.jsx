@@ -18,7 +18,7 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
       
       {/* Project Image */}
       <div 
-        className="h-48 bg-zinc-100 border-b border-zinc-200/80 overflow-hidden relative cursor-pointer"
+        className="h-44 sm:h-48 bg-zinc-100 border-b border-zinc-200/80 overflow-hidden relative cursor-pointer"
         onClick={() => onOpenModal && onOpenModal(projectData)}
       >
         {imageUrl ? (
@@ -39,7 +39,7 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
       </div>
 
       {/* Content */}
-      <div className="p-6 flex flex-col flex-grow justify-between space-y-4">
+      <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between space-y-4">
         <div>
           <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider block mb-1">
             {category}
@@ -76,7 +76,7 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
                   href={demoUrl} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1"
+                  className="font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 py-1"
                 >
                   <i className="fas fa-external-link-alt text-[10px]" />
                   Live Demo
@@ -87,7 +87,7 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
                   href={repoUrl} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-medium text-zinc-600 hover:text-zinc-950 flex items-center gap-1"
+                  className="font-medium text-zinc-600 hover:text-zinc-950 flex items-center gap-1 py-1"
                 >
                   <i className="fab fa-github" />
                   Code
@@ -98,7 +98,7 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
             <button
               type="button"
               onClick={() => onOpenModal && onOpenModal(projectData)}
-              className="text-zinc-400 hover:text-zinc-900 font-medium transition-colors cursor-pointer"
+              className="text-zinc-400 hover:text-zinc-900 font-medium transition-colors cursor-pointer py-1"
             >
               Details →
             </button>

@@ -51,11 +51,11 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 border-t border-zinc-200/80">
-      <div className="max-w-5xl mx-auto px-6">
+    <section id="contact" className="py-14 sm:py-20 border-t border-zinc-200/80">
+      <div className="max-w-5xl mx-auto px-5 sm:px-6">
         
         {/* Header */}
-        <div className="mb-10">
+        <div className="mb-8 sm:mb-10">
           <span className="text-xs font-mono font-medium text-zinc-500 uppercase tracking-wider block mb-1">
             04 / Connect
           </span>
@@ -64,10 +64,10 @@ const Contact = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* Left Details */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-5">
             <p className="text-base text-zinc-600 leading-relaxed">
               Whether you have a question about my projects, want to collaborate on a hardware build, or have an open role, feel free to send a message.
             </p>
@@ -75,12 +75,12 @@ const Contact = () => {
             <div className="space-y-3 text-xs">
               
               {/* Copy Email Box */}
-              <div className="p-4 rounded-xl bg-white border border-zinc-200 shadow-xs flex items-center justify-between gap-3">
-                <div>
+              <div className="p-4 rounded-xl bg-white border border-zinc-200 shadow-xs flex flex-col xs:flex-row xs:items-center justify-between gap-3">
+                <div className="min-w-0 flex-1">
                   <span className="text-zinc-400 font-mono block mb-0.5">Email</span>
                   <a 
                     href={`mailto:${emailAddress}`}
-                    className="font-mono font-semibold text-zinc-900 hover:text-blue-600 transition-colors"
+                    className="font-mono font-semibold text-zinc-900 hover:text-blue-600 transition-colors text-xs sm:text-sm break-all"
                   >
                     {emailAddress}
                   </a>
@@ -88,7 +88,7 @@ const Contact = () => {
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="font-mono text-xs px-2.5 py-1 rounded bg-zinc-100 text-zinc-700 hover:bg-zinc-200 transition-colors cursor-pointer"
+                  className="font-mono text-xs px-3 py-1.5 rounded bg-zinc-100 text-zinc-700 hover:bg-zinc-200 transition-colors cursor-pointer self-start xs:self-auto flex-shrink-0"
                   title="Copy email to clipboard"
                 >
                   {copied ? 'Copied ✓' : 'Copy'}
@@ -96,7 +96,7 @@ const Contact = () => {
               </div>
 
               {/* Social Links */}
-              <div className="grid grid-cols-2 gap-2 pt-2">
+              <div className="grid grid-cols-2 gap-2 pt-1">
                 <a
                   href="https://github.com/ParbinShrees"
                   target="_blank"
@@ -122,7 +122,7 @@ const Contact = () => {
           </div>
 
           {/* Right Form */}
-          <div className="lg:col-span-7 bg-white p-7 sm:p-8 rounded-2xl border border-zinc-200 shadow-xs">
+          <div className="lg:col-span-7 bg-white p-5 sm:p-8 rounded-2xl border border-zinc-200 shadow-xs">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -177,7 +177,7 @@ const Contact = () => {
               <button 
                 type="submit" 
                 disabled={status === 'submitting'}
-                className="w-full bg-zinc-900 text-white font-medium text-sm py-3 rounded-lg hover:bg-zinc-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                className="w-full bg-zinc-900 text-white font-medium text-sm py-3.5 rounded-lg hover:bg-zinc-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 {status === 'submitting' ? 'Sending message...' : 'Send Message'}
               </button>
