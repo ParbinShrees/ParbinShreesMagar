@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logoImg from '../projectpictures/transistion.logo.png';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -73,12 +72,10 @@ const Navbar = () => {
         {/* Brand / Logo */}
         <Link 
           to="/" 
-          className="flex items-center gap-2.5 text-zinc-900 hover:opacity-75 transition-opacity"
+          className="flex items-center hover:opacity-75 transition-opacity"
         >
-          <img src={logoImg} alt="Parbin" className="h-8 w-auto object-contain" />
-          <span className="font-semibold text-sm tracking-tight">
-            Parbin Shrees
-          </span>
+          {/* Add your new blue PSM logo as logo.png in the public folder */}
+          <img src="/logo.png" alt="PSM Logo" className="h-10 w-auto object-contain" />
         </Link>
 
         {/* Desktop Navigation */}

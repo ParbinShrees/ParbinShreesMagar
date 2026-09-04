@@ -33,6 +33,8 @@ const FeaturedProjectCard = ({ onOpenModal }) => {
           <img 
             src={duopongImg} 
             alt="DuoPong physical table tennis machine"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
             onError={(e) => {
               e.target.style.display = 'none';

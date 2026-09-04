@@ -25,17 +25,20 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
           <img 
             src={imageUrl} 
             alt={title} 
-            className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
             onError={(e) => {
+              e.target.onerror = null;
               e.target.style.display = 'none';
+              e.target.nextSibling.style.display = 'block';
             }}
           />
-        ) : (
-          <div className="flex flex-col items-center justify-center h-full text-zinc-400 p-4">
-            <i className="fas fa-laptop-code text-2xl mb-1" />
-            <span className="text-xs font-mono">{title}</span>
-          </div>
-        )}
+        ) : null}
+        <div className="flex flex-col items-center justify-center h-full text-zinc-400 p-4" style={{ display: imageUrl ? 'none' : 'flex' }}>
+          <i className="fas fa-laptop-code text-2xl mb-1" />
+          <span className="text-xs font-mono">{title}</span>
+        </div>
       </div>
 
       {/* Content */}

@@ -112,6 +112,8 @@ const Hero = () => {
               <img 
                 src={profileImg} 
                 alt="Parbin Shrees Magar" 
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-300"
               />
               <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-2xl pointer-events-none" />
