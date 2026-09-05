@@ -879,7 +879,72 @@ const ParbinPage = () => {
           .parbin-photo-img { max-height: 76vw; }
           .parbin-interest-card { padding: 1.5rem; }
         }
+
+        /* ─── Dark mode overrides ─── */
+        .dark .parbin-page {
+          --parbin-ink: #f5f5f7;
+          --parbin-muted: #a1a1aa;
+          --parbin-accent: #7b97f5;
+          background: #09090b;
+        }
+        .dark .parbin-hero {
+          background: linear-gradient(135deg, #111113 0%, #17181f 100%);
+          border-bottom-color: #27272a;
+        }
+        .dark .parbin-aurora-one { opacity: 0.18; }
+        .dark .parbin-kicker { color: var(--parbin-accent); }
+        .dark .parbin-hero-title { color: #f5f5f7; }
+        .dark .parbin-hero-sub { color: #a1a1aa; }
+        .dark .parbin-section-header { border-bottom-color: #3f3f46; }
+        .dark .parbin-section-title { color: #f5f5f7; }
+        .dark .parbin-bio-card {
+          background: #18181b;
+          border-color: #3f3f46;
+          color: #a1a1aa;
+          box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+        }
+        .dark .parbin-bio-card strong { color: #f5f5f7; }
+        .dark .parbin-bio-card:hover { box-shadow: 0 16px 36px rgba(0,0,0,0.5); }
+        .dark .parbin-tag {
+          background: #27272a;
+          border-color: #3f3f46;
+          color: #a5b4fc;
+        }
+        .dark .parbin-tag i { color: #7b97f5; }
+        .dark .parbin-tag:hover { background: #3f3f46; color: #c7d2fe; }
+        .dark .parbin-setup-card {
+          background: #18181b;
+          border-color: #3f3f46;
+          box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+        }
+        .dark .parbin-setup-card:hover { box-shadow: 0 18px 40px rgba(0,0,0,0.6); }
+        .dark .parbin-setup-title {
+          color: #f5f5f7;
+          border-bottom-color: #3f3f46;
+        }
+        .dark .parbin-setup-title-icon { background: #1e2a4a; color: var(--parbin-accent); }
+        .dark .parbin-spec-row { border-bottom-color: #27272a; }
+        .dark .parbin-spec-label { color: #71717a; }
+        .dark .parbin-spec-icon { color: var(--parbin-accent); }
+        .dark .parbin-spec-val { color: #f5f5f7; }
+        .dark .parbin-gallery-btn {
+          background: rgba(39,39,42,0.92);
+          border-color: #3f3f46;
+          color: var(--parbin-accent);
+        }
+        .dark .parbin-gallery-btn:hover { background: #3f3f46; }
+        .dark .parbin-dot { background: #3f3f46; }
+        .dark .parbin-dot.active { background: var(--parbin-accent); }
+        .dark .parbin-interest-card {
+          background: #18181b;
+          border-color: #3f3f46;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+        .dark .parbin-interest-card:hover { border-color: #52525b; box-shadow: 0 16px 34px rgba(0,0,0,0.5); }
+        .dark .parbin-interest-title { color: #f5f5f7; }
+        .dark .parbin-interest-desc { color: #a1a1aa; }
       `}</style>
+
     </PageTransition>
   );
 };
