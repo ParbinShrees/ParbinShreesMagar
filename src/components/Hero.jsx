@@ -30,7 +30,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.05 }}
             >
-              Full-stack developer building clean web software &amp; physical computing systems.
+              Full-stack developer building clean web software & physical computing systems.
             </motion.h1>
 
             {/* Bio */}
