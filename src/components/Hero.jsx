@@ -25,7 +25,7 @@ const Hero = () => {
 
             {/* Headline */}
             <motion.h1 
-              className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 leading-[1.2] sm:leading-[1.15]"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-black dark:text-white leading-[1.2] sm:leading-[1.15]"
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.05 }}
@@ -35,12 +35,12 @@ const Hero = () => {
 
             {/* Bio */}
             <motion.p 
-              className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl font-normal"
+              className="text-base sm:text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed max-w-2xl font-normal"
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
             >
-              I work across the web stack with <strong className="font-semibold text-zinc-900 dark:text-zinc-200">React</strong>, <strong className="font-semibold text-zinc-900 dark:text-zinc-200">Java (Spring Boot)</strong>, and <strong className="font-semibold text-zinc-900 dark:text-zinc-200">Node.js</strong>, and build hardware-driven projects with <strong className="font-semibold text-zinc-900 dark:text-zinc-200">Arduino</strong>.
+              I work across the web stack with <strong className="font-semibold text-zinc-900 dark:text-white">React</strong>, <strong className="font-semibold text-zinc-900 dark:text-white">Java (Spring Boot)</strong>, and <strong className="font-semibold text-zinc-900 dark:text-white">Node.js</strong>, and build hardware-driven projects with <strong className="font-semibold text-zinc-900 dark:text-white">Arduino</strong>.
             </motion.p>
 
             {/* Action Buttons & Socials */}
