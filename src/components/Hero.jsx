@@ -14,7 +14,7 @@ const Hero = () => {
             
             {/* Status & Location Meta */}
             <motion.div 
-              className="inline-flex flex-wrap items-center gap-2 text-xs font-mono text-zinc-600 bg-zinc-100 px-3 py-1.5 rounded-md border border-zinc-200"
+              className="inline-flex flex-wrap items-center gap-2 text-xs font-mono text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800/50 px-3 py-1.5 rounded-md border border-zinc-200 dark:border-zinc-700/50"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
@@ -25,7 +25,7 @@ const Hero = () => {
 
             {/* Headline */}
             <motion.h1 
-              className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 leading-[1.2] sm:leading-[1.15]"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 leading-[1.2] sm:leading-[1.15]"
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.05 }}
@@ -35,12 +35,12 @@ const Hero = () => {
 
             {/* Bio */}
             <motion.p 
-              className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl font-normal"
+              className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl font-normal"
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
             >
-              I work across the web stack with <strong className="font-semibold text-zinc-900">React</strong>, <strong className="font-semibold text-zinc-900">Java (Spring Boot)</strong>, and <strong className="font-semibold text-zinc-900">Node.js</strong>, and build hardware-driven projects with <strong className="font-semibold text-zinc-900">Arduino</strong>.
+              I work across the web stack with <strong className="font-semibold text-zinc-900 dark:text-zinc-200">React</strong>, <strong className="font-semibold text-zinc-900 dark:text-zinc-200">Java (Spring Boot)</strong>, and <strong className="font-semibold text-zinc-900 dark:text-zinc-200">Node.js</strong>, and build hardware-driven projects with <strong className="font-semibold text-zinc-900 dark:text-zinc-200">Arduino</strong>.
             </motion.p>
 
             {/* Action Buttons & Socials */}
@@ -57,7 +57,7 @@ const Hero = () => {
                     e.preventDefault();
                     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="text-sm font-semibold bg-zinc-900 text-white px-5 py-3 rounded-lg hover:bg-zinc-800 transition-colors shadow-xs text-center flex-1 sm:flex-initial"
+                  className="text-sm font-semibold bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-5 py-3 rounded-lg hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-xs text-center flex-1 sm:flex-initial"
                 >
                   View Selected Work
                 </a>
@@ -68,7 +68,7 @@ const Hero = () => {
                     e.preventDefault();
                     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="text-sm font-semibold text-zinc-700 bg-white hover:bg-zinc-50 border border-zinc-200 px-5 py-3 rounded-lg transition-colors shadow-xs text-center flex-1 sm:flex-initial"
+                  className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 px-5 py-3 rounded-lg transition-colors shadow-xs text-center flex-1 sm:flex-initial"
                 >
                   Contact Me
                 </a>
@@ -80,7 +80,7 @@ const Hero = () => {
                   href="https://github.com/ParbinShrees"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50 flex items-center justify-center transition-colors"
+                  className="w-10 h-10 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-700 flex items-center justify-center transition-colors"
                   title="GitHub"
                   aria-label="GitHub Profile"
                 >
@@ -90,7 +90,7 @@ const Hero = () => {
                   href="https://www.linkedin.com/in/parbin-shrees-6a32a2330/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50 flex items-center justify-center transition-colors"
+                  className="w-10 h-10 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-700 flex items-center justify-center transition-colors"
                   title="LinkedIn"
                   aria-label="LinkedIn Profile"
                 >
@@ -105,10 +105,14 @@ const Hero = () => {
           <motion.div 
             className="lg:col-span-4 flex justify-start"
             initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
+            transition={{ 
+              opacity: { duration: 0.5, delay: 0.1 },
+              scale: { duration: 0.5, delay: 0.1 },
+              y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+            }}
           >
-            <div className="w-28 h-28 sm:w-36 sm:h-36 lg:w-60 lg:h-60 rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm relative group flex-shrink-0">
+            <div className="w-28 h-28 sm:w-36 sm:h-36 lg:w-60 lg:h-60 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 shadow-sm relative group flex-shrink-0">
               <img 
                 src={profileImg} 
                 alt="Parbin Shrees Magar" 
@@ -116,7 +120,7 @@ const Hero = () => {
                 decoding="async"
                 className="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-300"
               />
-              <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-2xl pointer-events-none" />
+              <div className="absolute inset-0 ring-1 ring-inset ring-black/5 dark:ring-white/10 rounded-2xl pointer-events-none" />
             </div>
           </motion.div>
 
