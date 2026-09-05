@@ -66,7 +66,7 @@ const Navbar = () => {
     <header 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-200 ${
         isScrolled 
-          ? 'bg-white/85 backdrop-blur-md border-b border-zinc-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] py-3.5' 
+          ? 'bg-white/85 dark:bg-zinc-950/85 backdrop-blur-md border-b border-zinc-200/80 dark:border-zinc-800/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] py-3.5' 
           : 'bg-transparent py-5'
       }`}
     >
@@ -82,13 +82,13 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1 bg-zinc-100/80 backdrop-blur-sm p-1 rounded-full border border-zinc-200/80">
+        <nav className="hidden md:flex items-center gap-1 bg-zinc-100/80 dark:bg-zinc-800/80 backdrop-blur-sm p-1 rounded-full border border-zinc-200/80 dark:border-zinc-700/80">
           {navLinks.map((link) => {
             const active = isLinkActive(link);
             const classes = `text-xs font-medium px-3.5 py-1.5 rounded-full transition-all duration-150 ${
               active 
-                ? 'bg-white text-zinc-900 shadow-xs font-semibold' 
-                : 'text-zinc-600 hover:text-zinc-950'
+                ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-50 shadow-xs font-semibold' 
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-50'
             }`;
 
             if (link.isRoute) {

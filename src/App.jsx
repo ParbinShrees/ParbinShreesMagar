@@ -56,7 +56,7 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTopOnRoute />
-      <div className="min-h-screen font-sans selection:bg-[#0071e3] selection:text-white relative bg-[#f5f5f7]">
+      <div className="min-h-screen font-sans selection:bg-blue-600 selection:text-white relative bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300">
         <Navbar />
         <main>
           <AnimatedRoutes />
