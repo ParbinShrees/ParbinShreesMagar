@@ -42,7 +42,7 @@ const About = () => {
           </div>
 
           {/* Quick Overview Sidebar */}
-          <div className="lg:col-span-4 bg-zinc-50 border border-zinc-200/80 rounded-xl p-5 sm:p-6 space-y-3.5 text-xs font-medium w-full">
+          <div className="lg:col-span-4 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200/80 dark:border-zinc-700/50 rounded-xl p-5 sm:p-6 space-y-3.5 text-xs font-medium w-full">
             <div>
               <span className="text-zinc-400 uppercase font-mono block mb-0.5">Location</span>
               <p className="text-zinc-900 text-sm font-semibold">Pokhara, Nepal (UTC+5:45)</p>
