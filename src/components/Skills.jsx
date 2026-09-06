@@ -29,7 +29,7 @@ const Skills = () => {
           <span className="text-xs font-mono font-medium text-zinc-500 uppercase tracking-wider block mb-1">
             03 / Stack
           </span>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white">
             Skills &amp; Technologies
           </h2>
         </div>
@@ -39,7 +39,7 @@ const Skills = () => {
           {skillCategories.map((cat) => (
             <div 
               key={cat.title} 
-              className="bg-white border border-zinc-200/90 rounded-xl p-5 sm:p-6 shadow-xs flex flex-col justify-between hover:border-zinc-300 transition-colors"
+              className="bg-white dark:bg-zinc-800/60 border border-zinc-200/90 dark:border-zinc-700/50 rounded-xl p-5 sm:p-6 shadow-xs flex flex-col justify-between hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors"
             >
               <div>
                 <h3 className="text-xs sm:text-sm font-bold text-zinc-950 uppercase tracking-wider mb-3.5 pb-2 border-b border-zinc-100 font-mono">
