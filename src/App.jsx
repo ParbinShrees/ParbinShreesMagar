@@ -21,7 +21,7 @@ const FloatingScrollTop = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setVisible(window.scrollY > 400);
+      setVisible(window.scrollY > 300);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -34,6 +34,7 @@ const FloatingScrollTop = () => {
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       className="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-white/90 backdrop-blur-md border border-[#d2d2d7] text-[#1d1d1f] shadow-lg flex items-center justify-center hover:bg-[#0071e3] hover:text-white hover:border-[#0071e3] hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer group"
       aria-label="Scroll to top"
+      title="Back to top"
     >
       <i className="fas fa-chevron-up text-xs group-hover:-translate-y-0.5 transition-transform" />
     </button>
