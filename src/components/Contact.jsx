@@ -44,9 +44,11 @@ const Contact = () => {
 
       setStatus('success');
       setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setStatus('idle'), 5000);
     } catch (err) {
       console.error('EmailJS error:', err);
       setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
     }
   };
 
