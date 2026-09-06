@@ -20,7 +20,7 @@ const Hero = () => {
               transition={{ duration: 0.3 }}
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />
-              <span>Available for work · Pokhara, Nepal</span>
+              <span className="dark:text-zinc-300">Available for work · Pokhara, Nepal</span>
             </motion.div>
 
             {/* Headline */}
