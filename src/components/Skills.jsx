@@ -4,7 +4,7 @@ const Skills = () => {
   const skillCategories = [
     {
       title: 'Frontend',
-      skills: ['React', 'JavaScript (ES6+)', 'Tailwind CSS', 'Vite', 'HTML5 & CSS3', 'Responsive UI']
+      skills: ['React', 'JavaScript (ES6+)', 'TypeScript', 'Tailwind CSS', 'Vite', 'HTML5 & CSS3', 'Responsive UI']
     },
     {
       title: 'Backend',
