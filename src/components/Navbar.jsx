@@ -150,6 +150,8 @@ const Navbar = () => {
             className="text-zinc-700 dark:text-zinc-300 p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle Menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isMobileMenuOpen ? (
@@ -164,7 +166,7 @@ const Navbar = () => {
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-xl border-b border-zinc-200 px-6 py-4 flex flex-col gap-1 shadow-lg">
+        <div id="mobile-menu" className="md:hidden bg-white/95 backdrop-blur-xl border-b border-zinc-200 px-6 py-4 flex flex-col gap-1 shadow-lg">
           {navLinks.map((link) => {
             const active = isLinkActive(link);
             const classes = `text-sm font-medium py-2 px-3 rounded-lg transition-colors ${
