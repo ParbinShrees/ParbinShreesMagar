@@ -11,7 +11,7 @@ const About = () => {
           <span className="text-xs font-mono font-medium text-zinc-500 uppercase tracking-wider block mb-1">
             01 / Background
           </span>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white">
             About Me
           </h2>
         </div>
