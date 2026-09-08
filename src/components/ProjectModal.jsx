@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 const ProjectModal = ({ project, isOpen, onClose }) => {
+  const shouldReduceMotion = useReducedMotion();
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
@@ -27,35 +29,37 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
         onClick={onClose}
       >
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 30 }}
+          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 25 }}
+          animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+          exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 25 }}
           transition={{ duration: 0.2 }}
-          className="bg-white dark:bg-zinc-900 rounded-t-2xl sm:rounded-2xl max-w-2xl w-full max-h-[88vh] sm:max-h-[85vh] overflow-y-auto overscroll-contain shadow-2xl border border-zinc-200 dark:border-zinc-800 relative flex flex-col"
+          className="bg-white dark:bg-zinc-900 rounded-t-2xl sm:rounded-2xl max-w-2xl w-full max-h-[90vh] sm:max-h-[85vh] overflow-y-auto overscroll-contain shadow-2xl border border-zinc-200 dark:border-zinc-800 relative flex flex-col"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-3.5 right-3.5 z-20 w-9 h-9 rounded-full bg-white/90 dark:bg-zinc-800/90 backdrop-blur-sm border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white flex items-center justify-center hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors shadow-xs cursor-pointer"
+            className="absolute top-3.5 right-3.5 z-20 w-10 h-10 rounded-full bg-white/95 dark:bg-zinc-800/95 backdrop-blur-sm border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white active:scale-95 flex items-center justify-center transition-all shadow-xs cursor-pointer"
             aria-label="Close modal"
           >
-            <i className="fas fa-times text-xs" />
+            <i className="fas fa-times text-sm" />
           </button>
 
           {/* Project Image Banner */}
           {project.imageUrl && (
-            <div className="w-full h-48 sm:h-60 bg-zinc-100 dark:bg-zinc-800 relative overflow-hidden border-b border-zinc-200 dark:border-zinc-800 flex-shrink-0">
+            <div className="w-full h-36 xs:h-44 sm:h-56 max-h-[28vh] sm:max-h-none bg-zinc-100 dark:bg-zinc-800 relative overflow-hidden border-b border-zinc-200 dark:border-zinc-800 flex-shrink-0">
               <img
                 src={project.imageUrl}
                 alt={project.title}
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           )}
 
           {/* Modal Content */}
-          <div className="p-5 sm:p-8 pb-8 sm:pb-8 space-y-5">
+          <div className="p-5 sm:p-8 pb-[calc(2rem+env(safe-area-inset-bottom,0px))] sm:pb-8 space-y-5">
             <div>
               <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider block mb-1">
                 {project.category}
