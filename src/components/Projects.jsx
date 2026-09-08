@@ -79,30 +79,30 @@ const Projects = () => {
     : projectsData.filter(p => p.filterType === activeFilter);
 
   return (
-    <section id="projects" className="py-14 sm:py-20 border-t border-zinc-200/80">
+    <section id="projects" className="py-14 sm:py-20 border-t border-zinc-200/80 dark:border-zinc-800/80">
       <div className="max-w-5xl mx-auto px-5 sm:px-6">
         
         {/* Header & Filter */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-10 gap-4">
           <div>
-            <span className="text-xs font-mono font-medium text-zinc-500 uppercase tracking-wider block mb-1">
+            <span className="text-xs font-mono font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider block mb-1">
               02 / Projects
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white">
               Selected Work
             </h2>
           </div>
 
           {/* Filter Tabs (Horizontal scroll on very small screens, wraps cleanly) */}
-          <div className="flex items-center gap-1 bg-zinc-100 p-1 rounded-lg border border-zinc-200 overflow-x-auto max-w-full">
+          <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800/80 p-1 rounded-lg border border-zinc-200 dark:border-zinc-700/80 overflow-x-auto max-w-full">
             {filterTabs.map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setActiveFilter(tab.key)}
                 className={`text-xs font-medium px-3 py-1.5 rounded-md transition-all duration-150 cursor-pointer whitespace-nowrap flex-shrink-0 ${
                   activeFilter === tab.key
-                    ? 'bg-white text-zinc-950 font-semibold shadow-xs'
-                    : 'text-zinc-500 hover:text-zinc-900'
+                    ? 'bg-white dark:bg-zinc-700 text-zinc-950 dark:text-zinc-50 font-semibold shadow-xs'
+                    : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
                 }`}
               >
                 {tab.label}
@@ -131,7 +131,7 @@ const Projects = () => {
           </div>
         ) : (
           activeFilter === 'hardware' ? null : (
-            <p className="text-center text-zinc-500 text-sm py-8">
+            <p className="text-center text-zinc-500 dark:text-zinc-400 text-sm py-8">
               No projects in this category.
             </p>
           )

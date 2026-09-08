@@ -21,12 +21,12 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-14 sm:py-20 border-t border-zinc-200/80">
+    <section id="skills" className="py-14 sm:py-20 border-t border-zinc-200/80 dark:border-zinc-800/80">
       <div className="max-w-5xl mx-auto px-5 sm:px-6">
         
         {/* Header */}
         <div className="mb-8 sm:mb-10">
-          <span className="text-xs font-mono font-medium text-zinc-500 uppercase tracking-wider block mb-1">
+          <span className="text-xs font-mono font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider block mb-1">
             03 / Stack
           </span>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white">
@@ -42,7 +42,7 @@ const Skills = () => {
               className="bg-white dark:bg-zinc-800/60 border border-zinc-200/90 dark:border-zinc-700/50 rounded-xl p-5 sm:p-6 shadow-xs flex flex-col justify-between hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors"
             >
               <div>
-                <h3 className="text-xs sm:text-sm font-bold text-zinc-950 uppercase tracking-wider mb-3.5 pb-2 border-b border-zinc-100 font-mono">
+                <h3 className="text-xs sm:text-sm font-bold text-zinc-950 dark:text-zinc-100 uppercase tracking-wider mb-3.5 pb-2 border-b border-zinc-100 dark:border-zinc-700/60 font-mono">
                   {cat.title}
                 </h3>
                 
@@ -50,9 +50,9 @@ const Skills = () => {
                   {cat.skills.map((skill) => (
                     <li 
                       key={skill}
-                      className="text-xs font-mono text-zinc-700 flex items-center gap-2"
+                      className="text-xs font-mono text-zinc-700 dark:text-zinc-300 flex items-center gap-2"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-zinc-300 flex-shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-600 flex-shrink-0" />
                       <span>{skill}</span>
                     </li>
                   ))}

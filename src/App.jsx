@@ -32,7 +32,7 @@ const FloatingScrollTop = () => {
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-white/90 backdrop-blur-md border border-[#d2d2d7] text-[#1d1d1f] shadow-lg flex items-center justify-center hover:bg-[#0071e3] hover:text-white hover:border-[#0071e3] hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer group"
+      className="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-white/90 dark:bg-zinc-800/90 backdrop-blur-md border border-[#d2d2d7] dark:border-zinc-700 text-[#1d1d1f] dark:text-zinc-100 shadow-lg flex items-center justify-center hover:bg-[#0071e3] hover:text-white dark:hover:bg-[#0071e3] dark:hover:text-white hover:border-[#0071e3] dark:hover:border-[#0071e3] hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer group"
       aria-label="Scroll to top"
       title="Back to top"
     >

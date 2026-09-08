@@ -23,7 +23,7 @@ const Navbar = () => {
     } else if (isHome) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, [location]);
+  }, [location, isHome]);
 
   // Scroll listener for sticky background & active section
   useEffect(() => {
@@ -130,7 +130,7 @@ const Navbar = () => {
           </button>
           <a
             href="mailto:parbinshreesh64487@gmail.com"
-            className="text-xs font-medium text-zinc-900 bg-white hover:bg-zinc-50 border border-zinc-200 px-3.5 py-1.5 rounded-full shadow-xs hover:border-zinc-300 transition-all flex items-center gap-1.5"
+            className="text-xs font-medium text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 px-3.5 py-1.5 rounded-full shadow-xs hover:border-zinc-300 dark:hover:border-zinc-600 transition-all flex items-center gap-1.5"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
             Get in touch
@@ -166,11 +166,13 @@ const Navbar = () => {
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div id="mobile-menu" className="md:hidden bg-white/95 backdrop-blur-xl border-b border-zinc-200 px-6 py-4 flex flex-col gap-1 shadow-lg">
+        <div id="mobile-menu" className="md:hidden bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 px-6 py-4 flex flex-col gap-1 shadow-lg">
           {navLinks.map((link) => {
             const active = isLinkActive(link);
             const classes = `text-sm font-medium py-2 px-3 rounded-lg transition-colors ${
-              active ? 'bg-zinc-100 text-zinc-950 font-semibold' : 'text-zinc-600 hover:bg-zinc-50'
+              active 
+                ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white font-semibold' 
+                : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800/60 dark:hover:text-zinc-100'
             }`;
 
             if (link.isRoute) {
@@ -205,10 +207,10 @@ const Navbar = () => {
               </Link>
             );
           })}
-          <div className="pt-2 mt-2 border-t border-zinc-100">
+          <div className="pt-2 mt-2 border-t border-zinc-100 dark:border-zinc-800">
             <a
               href="mailto:parbinshreesh64487@gmail.com"
-              className="text-center block text-xs font-semibold bg-zinc-900 text-white py-2.5 rounded-lg"
+              className="text-center block text-xs font-semibold bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 py-2.5 rounded-lg hover:bg-zinc-800 dark:hover:bg-white transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               parbinshreesh64487@gmail.com

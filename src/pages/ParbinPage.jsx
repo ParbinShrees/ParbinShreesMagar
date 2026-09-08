@@ -3,11 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
 
 // Import setup & project photos
-import setup1 from '../projectpictures/setup1.jpg';
 import setup2 from '../projectpictures/setup2.jpeg';
-import profileImg from '../projectpictures/profile.jpg';
-import duopongImg from '../projectpictures/duopong.jpeg';
-import roselleImg from '../projectpictures/roselle.png';
 
 // Import photography gallery
 import photo1 from '../projectpictures/myphotography/1.jpeg';

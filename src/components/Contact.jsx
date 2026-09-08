@@ -53,15 +53,15 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-14 sm:py-20 border-t border-zinc-200/80">
+    <section id="contact" className="py-14 sm:py-20 border-t border-zinc-200/80 dark:border-zinc-800/80">
       <div className="max-w-5xl mx-auto px-5 sm:px-6">
         
         {/* Header */}
         <div className="mb-8 sm:mb-10">
-          <span className="text-xs font-mono font-medium text-zinc-500 uppercase tracking-wider block mb-1">
+          <span className="text-xs font-mono font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider block mb-1">
             04 / Connect
           </span>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white">
             Get in Touch
           </h2>
         </div>
@@ -70,19 +70,19 @@ const Contact = () => {
           
           {/* Left Details */}
           <div className="lg:col-span-5 space-y-5">
-            <p className="text-base text-zinc-600 leading-relaxed">
+            <p className="text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
               Whether you have a question about my projects, want to collaborate on a hardware build, or have an open role, feel free to send a message.
             </p>
 
             <div className="space-y-3 text-xs">
               
               {/* Copy Email Box */}
-              <div className="p-4 rounded-xl bg-white border border-zinc-200 shadow-xs flex flex-col xs:flex-row xs:items-center justify-between gap-3">
+              <div className="p-4 rounded-xl bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/80 shadow-xs flex flex-col xs:flex-row xs:items-center justify-between gap-3">
                 <div className="min-w-0 flex-1">
-                  <span className="text-zinc-400 font-mono block mb-0.5">Email</span>
+                  <span className="text-zinc-400 dark:text-zinc-500 font-mono block mb-0.5">Email</span>
                   <a 
                     href={`mailto:${emailAddress}`}
-                    className="font-mono font-semibold text-zinc-900 hover:text-blue-600 transition-colors text-xs sm:text-sm break-all"
+                    className="font-mono font-semibold text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-xs sm:text-sm break-all"
                   >
                     {emailAddress}
                   </a>
@@ -90,7 +90,7 @@ const Contact = () => {
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="font-mono text-xs px-3 py-1.5 rounded bg-zinc-100 text-zinc-700 hover:bg-zinc-200 transition-colors cursor-pointer self-start xs:self-auto flex-shrink-0"
+                  className="font-mono text-xs px-3 py-1.5 rounded bg-zinc-100 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-600 transition-colors cursor-pointer self-start xs:self-auto flex-shrink-0"
                   title="Copy email to clipboard"
                 >
                   {copied ? 'Copied ✓' : 'Copy'}
@@ -103,7 +103,7 @@ const Contact = () => {
                   href="https://github.com/ParbinShrees"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 bg-white border border-zinc-200 rounded-xl flex items-center gap-2 hover:border-zinc-300 transition-colors font-medium text-zinc-800"
+                  className="p-3 bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/80 rounded-xl flex items-center gap-2 hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors font-medium text-zinc-800 dark:text-zinc-200"
                 >
                   <i className="fab fa-github" />
                   <span>GitHub</span>
@@ -113,7 +113,7 @@ const Contact = () => {
                   href="https://www.linkedin.com/in/parbin-shrees-6a32a2330/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 bg-white border border-zinc-200 rounded-xl flex items-center gap-2 hover:border-zinc-300 transition-colors font-medium text-zinc-800"
+                  className="p-3 bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/80 rounded-xl flex items-center gap-2 hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors font-medium text-zinc-800 dark:text-zinc-200"
                 >
                   <i className="fab fa-linkedin-in text-[#0077b5]" />
                   <span>LinkedIn</span>
@@ -124,11 +124,11 @@ const Contact = () => {
           </div>
 
           {/* Right Form */}
-          <div className="lg:col-span-7 bg-white p-5 sm:p-8 rounded-2xl border border-zinc-200 shadow-xs">
+          <div className="lg:col-span-7 bg-white dark:bg-zinc-800/80 p-5 sm:p-8 rounded-2xl border border-zinc-200 dark:border-zinc-700/80 shadow-xs">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="name" className="block text-xs font-mono font-medium text-zinc-700 mb-1.5">
+                  <label htmlFor="name" className="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300 mb-1.5">
                     Name
                   </label>
                   <input 
@@ -138,13 +138,13 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-sm text-zinc-900 focus:outline-none focus:bg-white focus:border-zinc-900 transition-colors font-sans"
+                    className="w-full bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-700 rounded-lg p-3 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:bg-white dark:focus:bg-zinc-900 focus:border-zinc-900 dark:focus:border-zinc-400 transition-colors font-sans"
                     placeholder="Your name"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="email" className="block text-xs font-mono font-medium text-zinc-700 mb-1.5">
+                  <label htmlFor="email" className="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300 mb-1.5">
                     Email
                   </label>
                   <input 
@@ -154,14 +154,14 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-sm text-zinc-900 focus:outline-none focus:bg-white focus:border-zinc-900 transition-colors font-sans"
+                    className="w-full bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-700 rounded-lg p-3 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:bg-white dark:focus:bg-zinc-900 focus:border-zinc-900 dark:focus:border-zinc-400 transition-colors font-sans"
                     placeholder="name@example.com"
                   />
                 </div>
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-xs font-mono font-medium text-zinc-700 mb-1.5">
+                <label htmlFor="message" className="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300 mb-1.5">
                   Message
                 </label>
                 <textarea 
@@ -171,7 +171,7 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows="4"
-                  className="w-full bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-sm text-zinc-900 focus:outline-none focus:bg-white focus:border-zinc-900 transition-colors font-sans resize-none"
+                  className="w-full bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-700 rounded-lg p-3 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:bg-white dark:focus:bg-zinc-900 focus:border-zinc-900 dark:focus:border-zinc-400 transition-colors font-sans resize-none"
                   placeholder="Tell me about your project or inquiry..."
                 ></textarea>
               </div>
@@ -179,19 +179,19 @@ const Contact = () => {
               <button 
                 type="submit" 
                 disabled={status === 'submitting'}
-                className="w-full bg-zinc-900 text-white font-medium text-sm py-3.5 rounded-lg hover:bg-zinc-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                className="w-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium text-sm py-3.5 rounded-lg hover:bg-zinc-800 dark:hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 {status === 'submitting' ? 'Sending message...' : 'Send Message'}
               </button>
               
               {status === 'success' && (
-                <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-xs text-emerald-800 font-medium">
+                <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-lg text-xs text-emerald-800 dark:text-emerald-300 font-medium">
                   ✓ Message sent successfully. I will get back to you soon.
                 </div>
               )}
               
               {status === 'error' && (
-                <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700 font-medium">
+                <div className="p-3 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 rounded-lg text-xs text-red-700 dark:text-red-300 font-medium">
                   Error sending message. Please email me directly at <a href={`mailto:${emailAddress}`} className="underline">{emailAddress}</a>.
                 </div>
               )}

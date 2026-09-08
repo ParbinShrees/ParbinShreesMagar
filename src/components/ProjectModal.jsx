@@ -31,13 +31,13 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 30 }}
           transition={{ duration: 0.2 }}
-          className="bg-white rounded-t-2xl sm:rounded-2xl max-w-2xl w-full max-h-[88vh] sm:max-h-[85vh] overflow-y-auto shadow-2xl border border-zinc-200 relative flex flex-col"
+          className="bg-white dark:bg-zinc-900 rounded-t-2xl sm:rounded-2xl max-w-2xl w-full max-h-[88vh] sm:max-h-[85vh] overflow-y-auto shadow-2xl border border-zinc-200 dark:border-zinc-800 relative flex flex-col"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-3.5 right-3.5 z-20 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm border border-zinc-200 text-zinc-600 hover:text-zinc-950 flex items-center justify-center hover:bg-zinc-100 transition-colors shadow-xs"
+            className="absolute top-3.5 right-3.5 z-20 w-9 h-9 rounded-full bg-white/90 dark:bg-zinc-800/90 backdrop-blur-sm border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white flex items-center justify-center hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors shadow-xs cursor-pointer"
             aria-label="Close modal"
           >
             <i className="fas fa-times text-xs" />
@@ -45,7 +45,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
           {/* Project Image Banner */}
           {project.imageUrl && (
-            <div className="w-full h-48 sm:h-60 bg-zinc-100 relative overflow-hidden border-b border-zinc-200 flex-shrink-0">
+            <div className="w-full h-48 sm:h-60 bg-zinc-100 dark:bg-zinc-800 relative overflow-hidden border-b border-zinc-200 dark:border-zinc-800 flex-shrink-0">
               <img
                 src={project.imageUrl}
                 alt={project.title}
@@ -57,13 +57,13 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
           {/* Modal Content */}
           <div className="p-5 sm:p-8 space-y-5">
             <div>
-              <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider block mb-1">
+              <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider block mb-1">
                 {project.category}
               </span>
-              <h3 className="text-xl sm:text-2xl font-bold text-zinc-950 tracking-tight mb-2">
+              <h3 className="text-xl sm:text-2xl font-bold text-zinc-950 dark:text-white tracking-tight mb-2">
                 {project.title}
               </h3>
-              <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
                 {project.fullDescription || project.description}
               </p>
             </div>
@@ -71,13 +71,13 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
             {/* Key Features */}
             {project.features && project.features.length > 0 && (
               <div>
-                <h4 className="text-xs font-mono font-bold text-zinc-900 uppercase tracking-wider mb-2">
+                <h4 className="text-xs font-mono font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-2">
                   Key Technical Details
                 </h4>
                 <ul className="space-y-2">
                   {project.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-zinc-600">
-                      <span className="text-zinc-400 mt-0.5">•</span>
+                    <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-300">
+                      <span className="text-zinc-400 dark:text-zinc-500 mt-0.5">•</span>
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -87,14 +87,14 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
             {/* Tech Stack */}
             <div>
-              <h4 className="text-xs font-mono font-bold text-zinc-900 uppercase tracking-wider mb-2">
+              <h4 className="text-xs font-mono font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-2">
                 Technologies Used
               </h4>
               <div className="flex flex-wrap gap-1.5">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs font-mono bg-zinc-100 px-2.5 py-1 text-zinc-700 rounded border border-zinc-200"
+                    className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-200 dark:border-zinc-700"
                   >
                     {tag}
                   </span>
@@ -103,13 +103,13 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-2.5 pt-4 border-t border-zinc-100">
+            <div className="flex flex-wrap items-center gap-2.5 pt-4 border-t border-zinc-100 dark:border-zinc-800">
               {project.demoUrl && project.demoUrl !== '#' && project.demoUrl !== '' && (
                 <a
                   href={project.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-semibold bg-zinc-900 text-white px-4 py-2.5 rounded-lg hover:bg-zinc-800 transition-colors flex items-center gap-1.5 flex-1 sm:flex-initial justify-center"
+                  className="text-xs font-semibold bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-4 py-2.5 rounded-lg hover:bg-zinc-800 dark:hover:bg-white transition-colors flex items-center gap-1.5 flex-1 sm:flex-initial justify-center"
                 >
                   <i className="fas fa-external-link-alt text-[10px]" />
                   Visit Live Demo
@@ -120,7 +120,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                   href={project.repoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-semibold text-zinc-700 bg-white hover:bg-zinc-50 border border-zinc-200 px-4 py-2.5 rounded-lg transition-colors flex items-center gap-1.5 flex-1 sm:flex-initial justify-center"
+                  className="text-xs font-semibold text-zinc-700 dark:text-zinc-200 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 px-4 py-2.5 rounded-lg transition-colors flex items-center gap-1.5 flex-1 sm:flex-initial justify-center"
                 >
                   <i className="fab fa-github" />
                   GitHub Repository
@@ -128,7 +128,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
               )}
               <button
                 onClick={onClose}
-                className="text-xs font-medium text-zinc-500 hover:text-zinc-900 px-3 py-2 transition-colors ml-auto cursor-pointer"
+                className="text-xs font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 px-3 py-2 transition-colors ml-auto cursor-pointer"
               >
                 Close
               </button>
