@@ -33,7 +33,7 @@ const About = () => {
             <div className="pt-2">
               <Link
                 to="/parbin"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 bg-zinc-100/70 dark:bg-zinc-800/60 sm:bg-transparent sm:dark:bg-transparent py-2.5 px-3.5 sm:p-0 rounded-lg transition-colors group"
               >
                 <span>Read more about my setup &amp; photography</span>
                 <i className="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform" />
