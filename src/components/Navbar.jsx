@@ -25,6 +25,22 @@ const Navbar = () => {
     }
   }, [location, isHome]);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setIsMobileMenuOpen(false);
+    };
+    if (isMobileMenuOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isMobileMenuOpen]);
+
   // Scroll listener for sticky background & active section
   useEffect(() => {
     const handleScroll = () => {
@@ -164,9 +180,15 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer & Backdrop */}
       {isMobileMenuOpen && (
-        <div id="mobile-menu" className="md:hidden bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 px-6 py-4 flex flex-col gap-1 shadow-lg">
+        <>
+          <div 
+            className="md:hidden fixed inset-0 top-[57px] bg-black/40 backdrop-blur-xs z-40"
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+          <div id="mobile-menu" className="md:hidden relative z-50 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 px-6 py-4 flex flex-col gap-1 shadow-lg">
           {navLinks.map((link) => {
             const active = isLinkActive(link);
             const classes = `text-sm font-medium py-2 px-3 rounded-lg transition-colors ${
@@ -217,6 +239,7 @@ const Navbar = () => {
             </a>
           </div>
         </div>
+      </>
       )}
     </header>
   );
