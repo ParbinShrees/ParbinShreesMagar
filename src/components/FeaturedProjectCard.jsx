@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import duopongImg from '../projectpictures/duopong.jpeg';
 
 const FeaturedProjectCard = ({ onOpenModal }) => {
+  const [imgError, setImgError] = useState(false);
   const duoPongData = {
     title: "DuoPong — Hardware Table Tennis Machine",
     category: "Arduino · Hardware · Embedded C/C++",
@@ -27,19 +28,24 @@ const FeaturedProjectCard = ({ onOpenModal }) => {
         
         {/* Photo */}
         <div 
-          className="lg:col-span-6 bg-zinc-100 dark:bg-zinc-900 aspect-[16/10] sm:aspect-[4/3] lg:aspect-auto lg:min-h-[340px] relative overflow-hidden border-b lg:border-b-0 lg:border-r border-zinc-200 dark:border-zinc-700/80 cursor-pointer group"
+          className="lg:col-span-6 bg-zinc-100 dark:bg-zinc-900 aspect-[16/10] sm:aspect-[4/3] lg:aspect-auto lg:min-h-[340px] relative overflow-hidden border-b lg:border-b-0 lg:border-r border-zinc-200 dark:border-zinc-700/80 cursor-pointer group flex items-center justify-center"
           onClick={() => onOpenModal && onOpenModal(duoPongData)}
         >
-          <img 
-            src={duopongImg} 
-            alt="DuoPong physical table tennis machine"
-            loading="lazy"
-            decoding="async"
-            className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
-            onError={(e) => {
-              e.target.style.display = 'none';
-            }}
-          />
+          {!imgError ? (
+            <img 
+              src={duopongImg} 
+              alt="DuoPong physical table tennis machine"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div className="flex flex-col items-center justify-center p-8 text-zinc-400 dark:text-zinc-600">
+              <i className="fas fa-microchip text-4xl mb-2 text-zinc-400 dark:text-zinc-500" />
+              <span className="text-xs font-mono">DuoPong Arcade</span>
+            </div>
+          )}
           <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4">
             <span className="text-[11px] font-mono font-semibold bg-zinc-900/85 text-white backdrop-blur-md px-2.5 py-1 rounded-md shadow-xs">
               Featured Build
