@@ -11,15 +11,33 @@ const Navbar = () => {
   const location = useLocation();
   const isHome = location.pathname === '/';
 
-  // Handle hash scrolling
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
+  // Handle hash scrolling with multi-attempt retry (for slow/budget devices)
   useEffect(() => {
     if (location.hash) {
-      setTimeout(() => {
-        const element = document.getElementById(location.hash.replace('#', ''));
+      const targetId = location.hash.replace('#', '');
+      let attempts = 0;
+      const tryScroll = () => {
+        const element = document.getElementById(targetId);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
+        } else if (attempts < 8) {
+          attempts++;
+          setTimeout(tryScroll, 75);
         }
-      }, 100);
+      };
+      tryScroll();
     } else if (isHome) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -80,21 +98,21 @@ const Navbar = () => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-200 ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-200 pt-[env(safe-area-inset-top,0px)] ${
         isScrolled 
-          ? 'bg-white/85 dark:bg-zinc-950/85 backdrop-blur-md border-b border-zinc-200/80 dark:border-zinc-800/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] py-3.5' 
-          : 'bg-transparent py-5'
+          ? 'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md border-b border-zinc-200/80 dark:border-zinc-800/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] py-3' 
+          : 'bg-transparent py-4 sm:py-5'
       }`}
     >
-      <div className="max-w-5xl mx-auto px-6 flex justify-between items-center">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 flex justify-between items-center">
         
         {/* Brand / Logo */}
         <Link 
           to="/" 
           className="flex items-center hover:opacity-75 transition-opacity"
+          aria-label="Home page"
         >
-          {/* Add your new blue PSM logo as logo.png in the public folder */}
-          <img src="/logo.png" alt="PSM Logo" className="h-10 w-auto object-contain" />
+          <img src="/logo.png" alt="PSM Logo" className="h-9 sm:h-10 w-auto object-contain" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -139,7 +157,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-3">
           <button
             onClick={toggleTheme}
-            className="p-1.5 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-colors"
+            className="w-9 h-9 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 transition-colors flex items-center justify-center cursor-pointer"
             aria-label="Toggle theme"
           >
             {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -153,23 +171,23 @@ const Navbar = () => {
           </a>
         </div>
 
-        {/* Mobile Toggle */}
-        <div className="md:hidden flex items-center gap-2">
+        {/* Mobile Toggle & Actions */}
+        <div className="md:hidden flex items-center gap-1.5">
           <button
             onClick={toggleTheme}
-            className="text-zinc-700 dark:text-zinc-300 p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
+            className="w-11 h-11 flex items-center justify-center text-zinc-700 dark:text-zinc-300 active:bg-zinc-100 dark:active:bg-zinc-800 rounded-lg transition-colors cursor-pointer"
             aria-label="Toggle theme"
           >
             {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
           <button 
-            className="text-zinc-700 dark:text-zinc-300 p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
+            className="w-11 h-11 flex items-center justify-center text-zinc-700 dark:text-zinc-300 active:bg-zinc-100 dark:active:bg-zinc-800 rounded-lg transition-colors cursor-pointer"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle Menu"
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isMobileMenuOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               ) : (
@@ -184,62 +202,67 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <>
           <div 
-            className="md:hidden fixed inset-0 top-[57px] bg-black/40 backdrop-blur-xs z-40"
+            className="md:hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-xs"
             onClick={() => setIsMobileMenuOpen(false)}
             aria-hidden="true"
           />
-          <div id="mobile-menu" className="md:hidden relative z-50 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 px-6 py-4 flex flex-col gap-1 shadow-lg">
-          {navLinks.map((link) => {
-            const active = isLinkActive(link);
-            const classes = `text-sm font-medium py-2 px-3 rounded-lg transition-colors ${
-              active 
-                ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white font-semibold' 
-                : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800/60 dark:hover:text-zinc-100'
-            }`;
+          <div 
+            id="mobile-menu" 
+            className="md:hidden relative z-50 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 px-5 py-4 flex flex-col gap-1.5 shadow-xl animate-in fade-in slide-in-from-top-2 duration-150"
+          >
+            {navLinks.map((link) => {
+              const active = isLinkActive(link);
+              const classes = `text-sm font-medium py-3 px-3 rounded-lg transition-colors flex items-center justify-between ${
+                active 
+                  ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white font-semibold' 
+                  : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800/60 dark:hover:text-zinc-100 active:bg-zinc-100 dark:active:bg-zinc-800'
+              }`;
 
-            if (link.isRoute) {
+              if (link.isRoute) {
+                return (
+                  <Link 
+                    key={link.name} 
+                    to={link.href} 
+                    className={classes}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <span>{link.name}</span>
+                    <i className="fas fa-chevron-right text-xs opacity-40" />
+                  </Link>
+                );
+              }
+
+              const targetPath = isHome ? link.href : `/${link.href}`;
               return (
                 <Link 
                   key={link.name} 
-                  to={link.href} 
+                  to={targetPath}
                   className={classes}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    setIsMobileMenuOpen(false);
+                    if (isHome) {
+                      e.preventDefault();
+                      const el = document.getElementById(link.id);
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                 >
-                  {link.name}
+                  <span>{link.name}</span>
+                  <i className="fas fa-chevron-right text-xs opacity-40" />
                 </Link>
               );
-            }
-
-            const targetPath = isHome ? link.href : `/${link.href}`;
-            return (
-              <Link 
-                key={link.name} 
-                to={targetPath}
-                className={classes}
-                onClick={(e) => {
-                  setIsMobileMenuOpen(false);
-                  if (isHome) {
-                    e.preventDefault();
-                    const el = document.getElementById(link.id);
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+            })}
+            <div className="pt-3 mt-1 border-t border-zinc-100 dark:border-zinc-800">
+              <a
+                href="mailto:parbinshreesh64487@gmail.com"
+                className="text-center block text-xs font-semibold bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 py-3 rounded-lg hover:bg-zinc-800 dark:hover:bg-white transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
               >
-                {link.name}
-              </Link>
-            );
-          })}
-          <div className="pt-2 mt-2 border-t border-zinc-100 dark:border-zinc-800">
-            <a
-              href="mailto:parbinshreesh64487@gmail.com"
-              className="text-center block text-xs font-semibold bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 py-2.5 rounded-lg hover:bg-zinc-800 dark:hover:bg-white transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              parbinshreesh64487@gmail.com
-            </a>
+                parbinshreesh64487@gmail.com
+              </a>
+            </div>
           </div>
-        </div>
-      </>
+        </>
       )}
     </header>
   );
