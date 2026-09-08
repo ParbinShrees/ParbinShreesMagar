@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from 'framer-motion';
 
 const ProjectCard = ({ title, category, description, fullDescription, features, tags, repoUrl, demoUrl, imageUrl, onOpenModal }) => {
   const [isHoverDevice, setIsHoverDevice] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     setIsHoverDevice(window.matchMedia('(hover: hover) and (pointer: fine)').matches);
   }, []);
+
+  const enableTilt = isHoverDevice && !shouldReduceMotion;
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -18,7 +21,7 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
 
   const handleMouseMove = (e) => {
-    if (!isHoverDevice) return;
+    if (!enableTilt) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -31,7 +34,7 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
   };
 
   const handleMouseLeave = () => {
-    if (!isHoverDevice) return;
+    if (!enableTilt) return;
     x.set(0);
     y.set(0);
   };
@@ -50,9 +53,9 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
 
   return (
     <motion.div 
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={isHoverDevice ? {
+      onMouseMove={enableTilt ? handleMouseMove : undefined}
+      onMouseLeave={enableTilt ? handleMouseLeave : undefined}
+      style={enableTilt ? {
         rotateX,
         rotateY,
         transformStyle: "preserve-3d"
@@ -64,7 +67,7 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
       <div 
         className="h-44 sm:h-48 bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200/80 dark:border-zinc-700/80 overflow-hidden relative cursor-pointer"
         onClick={() => onOpenModal && onOpenModal(projectData)}
-        style={isHoverDevice ? { transform: "translateZ(30px)" } : {}}
+        style={enableTilt ? { transform: "translateZ(30px)" } : {}}
       >
         {imageUrl ? (
           <img 

@@ -1,8 +1,10 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import profileImg from '../projectpictures/profile.jpg';
 
 const Hero = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section id="home" className="pt-24 sm:pt-28 md:pt-32 pb-14 md:pb-20">
       <div className="max-w-5xl mx-auto px-5 sm:px-6">
@@ -57,7 +59,7 @@ const Hero = () => {
                     e.preventDefault();
                     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="text-xs sm:text-sm font-semibold bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-4 sm:px-5 py-3 rounded-lg hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-xs text-center flex-1 sm:flex-initial"
+                  className="text-xs sm:text-sm font-semibold bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-4 sm:px-5 py-3 rounded-lg hover:bg-zinc-800 dark:hover:bg-white active:scale-[0.98] transition-all shadow-xs text-center flex-1 sm:flex-initial min-h-[44px] flex items-center justify-center"
                 >
                   View Selected Work
                 </a>
@@ -68,7 +70,7 @@ const Hero = () => {
                     e.preventDefault();
                     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="text-xs sm:text-sm font-semibold text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 px-4 sm:px-5 py-3 rounded-lg transition-colors shadow-xs text-center flex-1 sm:flex-initial"
+                  className="text-xs sm:text-sm font-semibold text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 active:scale-[0.98] border border-zinc-200 dark:border-zinc-700 px-4 sm:px-5 py-3 rounded-lg transition-all shadow-xs text-center flex-1 sm:flex-initial min-h-[44px] flex items-center justify-center"
                 >
                   Contact Me
                 </a>
@@ -80,7 +82,7 @@ const Hero = () => {
                   href="https://github.com/ParbinShrees"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-700 flex items-center justify-center transition-colors"
+                  className="w-11 h-11 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-700 active:scale-95 flex items-center justify-center transition-all"
                   title="GitHub"
                   aria-label="GitHub Profile"
                 >
@@ -90,7 +92,7 @@ const Hero = () => {
                   href="https://www.linkedin.com/in/parbin-shrees-6a32a2330/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-700 flex items-center justify-center transition-colors"
+                  className="w-11 h-11 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-700 active:scale-95 flex items-center justify-center transition-all"
                   title="LinkedIn"
                   aria-label="LinkedIn Profile"
                 >
@@ -105,14 +107,14 @@ const Hero = () => {
           <motion.div 
             className="lg:col-span-4 flex justify-start"
             initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
-            transition={{ 
-              opacity: { duration: 0.5, delay: 0.1 },
-              scale: { duration: 0.5, delay: 0.1 },
-              y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+            animate={shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1, y: [0, -6, 0] }}
+            transition={shouldReduceMotion ? { duration: 0.3 } : { 
+              opacity: { duration: 0.4, delay: 0.1 },
+              scale: { duration: 0.4, delay: 0.1 },
+              y: { duration: 5, repeat: Infinity, ease: "easeInOut" }
             }}
           >
-            <div className="w-28 h-28 sm:w-36 sm:h-36 lg:w-60 lg:h-60 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 shadow-sm relative group flex-shrink-0">
+            <div className="w-28 h-28 sm:w-36 sm:h-36 lg:w-60 lg:h-60 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 shadow-sm relative group flex-shrink-0 will-change-transform">
               <img 
                 src={profileImg} 
                 alt="Parbin Shrees Magar" 
