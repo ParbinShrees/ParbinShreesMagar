@@ -31,7 +31,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 30 }}
           transition={{ duration: 0.2 }}
-          className="bg-white dark:bg-zinc-900 rounded-t-2xl sm:rounded-2xl max-w-2xl w-full max-h-[88vh] sm:max-h-[85vh] overflow-y-auto shadow-2xl border border-zinc-200 dark:border-zinc-800 relative flex flex-col"
+          className="bg-white dark:bg-zinc-900 rounded-t-2xl sm:rounded-2xl max-w-2xl w-full max-h-[88vh] sm:max-h-[85vh] overflow-y-auto overscroll-contain shadow-2xl border border-zinc-200 dark:border-zinc-800 relative flex flex-col"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close button */}
@@ -55,7 +55,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
           )}
 
           {/* Modal Content */}
-          <div className="p-5 sm:p-8 space-y-5">
+          <div className="p-5 sm:p-8 pb-8 sm:pb-8 space-y-5">
             <div>
               <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider block mb-1">
                 {project.category}
