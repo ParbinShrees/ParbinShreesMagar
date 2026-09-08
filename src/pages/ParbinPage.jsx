@@ -140,6 +140,7 @@ const GallerySlider = () => {
               const isPrev    = offset === -1 || (current === 0 && idx === total - 1 && offset !== 0);
               const isNext    = offset === 1  || (current === total - 1 && idx === 0 && offset !== 0);
 
+              const isVisible = isActive || isPrev || isNext;
               let zIndex   = 1;
               let scale    = 0.82;
               let opacity  = 0;
@@ -158,15 +159,25 @@ const GallerySlider = () => {
                     transform: `translateX(${translateX}%) scale(${scale}) rotate(${rotate}deg)`,
                     zIndex,
                     opacity,
+                    visibility: isVisible ? 'visible' : 'hidden',
+                    pointerEvents: isVisible ? 'auto' : 'none',
                     transition: 'all 0.45s cubic-bezier(0.4,0,0.2,1)',
                   }}
                   onClick={() => { if (isActive) setLightbox(photo); else if (offset < 0) prev(); else next(); }}
                 >
-                  <div
-                    className="parbin-photo-blur-bg"
-                    style={{ backgroundImage: `url(${photo.src})` }}
+                  {isVisible && (
+                    <div
+                      className="parbin-photo-blur-bg"
+                      style={{ backgroundImage: `url(${photo.src})` }}
+                    />
+                  )}
+                  <img 
+                    src={photo.src} 
+                    alt={photo.alt} 
+                    loading={isActive ? "eager" : "lazy"} 
+                    decoding="async" 
+                    className="parbin-photo-img" 
                   />
-                  <img src={photo.src} alt={photo.alt} className="parbin-photo-img" />
                 </div>
               );
             })}
@@ -678,8 +689,8 @@ const ParbinPage = () => {
           inset: 0;
           background-size: cover;
           background-position: center;
-          filter: blur(18px) brightness(0.72) saturate(1.3);
-          transform: scale(1.12);
+          filter: blur(10px) brightness(0.75) saturate(1.2);
+          transform: scale(1.08);
           z-index: 0;
         }
         .parbin-photo-img {
@@ -846,7 +857,16 @@ const ParbinPage = () => {
         @keyframes parbin-float { from { transform:translate3d(-1rem,-1rem,0); } to { transform:translate3d(2rem,1rem,0); } }
         @keyframes parbin-title-in { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
         @keyframes parbin-image-breathe { from { transform:scale(1); } to { transform:scale(1.025); } }
-        @media (prefers-reduced-motion:reduce) { .parbin-aurora,.parbin-hero-title,.parbin-photo-card.active .parbin-photo-img { animation:none; } .parbin-bio-card,.parbin-tag,.parbin-photo-img { transition:none; } }
+        @media (prefers-reduced-motion:reduce) { 
+          .parbin-aurora,
+          .parbin-hero-title,
+          .parbin-photo-card.active .parbin-photo-img { animation:none; } 
+          .parbin-bio-card,
+          .parbin-setup-card,
+          .parbin-tag,
+          .parbin-photo-img,
+          .parbin-interest-card { transition:none; transform:none !important; } 
+        }
 
         /* ─── Responsive ─── */
         @media (max-width: 640px) {
@@ -874,11 +894,12 @@ const ParbinPage = () => {
           }
           .parbin-gallery-stage {
             min-height: 0;
-            width: 82vw;
-            height: 82vw;
+            width: 100%;
+            max-width: 380px;
+            height: min(78vw, 360px);
           }
-          .parbin-photo-card { width: 100%; max-width: 100%; }
-          .parbin-photo-img { max-height: 76vw; }
+          .parbin-photo-card { width: 100%; max-width: 380px; }
+          .parbin-photo-img { max-height: min(72vw, 340px); }
           .parbin-interest-card { padding: 1.5rem; }
         }
 
