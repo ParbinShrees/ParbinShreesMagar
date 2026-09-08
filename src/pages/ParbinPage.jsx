@@ -713,6 +713,7 @@ const ParbinPage = () => {
 
         .parbin-gallery-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: -0.5rem; }
         .parbin-dot {
+          position: relative;
           width: 8px; height: 8px;
           border-radius: 50%;
           border: none;
@@ -720,6 +721,11 @@ const ParbinPage = () => {
           cursor: pointer;
           transition: background 0.2s, transform 0.2s;
           padding: 0;
+        }
+        .parbin-dot::before {
+          content: '';
+          position: absolute;
+          inset: -12px;
         }
         .parbin-dot.active { background: #0071e3; transform: scale(1.3); }
 
@@ -805,7 +811,7 @@ const ParbinPage = () => {
         }
 
         /* Refined visual polish: one accent, subtle movement */
-        .parbin-page { --parbin-ink:#1d1d1f; --parbin-muted:#6e6e73; --parbin-accent:#4967d6; background:#f7f7f9; overflow:hidden; }
+        .parbin-page { --parbin-ink:#1d1d1f; --parbin-muted:#6e6e73; --parbin-accent:#4967d6; background:#f7f7f9; overflow-x:hidden; }
         .parbin-hero { position:relative; isolation:isolate; overflow:hidden; background:linear-gradient(135deg,#fff 0%,#f4f6fc 100%); border-bottom-color:#dedfe5; }
         .parbin-hero .parbin-container { position:relative; z-index:2; }
         .parbin-aurora { position:absolute; z-index:-1; width:32rem; height:32rem; border-radius:50%; filter:blur(24px); opacity:.22; animation:parbin-float 15s ease-in-out infinite alternate; }
