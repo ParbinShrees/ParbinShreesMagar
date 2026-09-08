@@ -50,14 +50,14 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.15 }}
             >
-              <div className="flex items-center gap-3 w-full sm:w-auto">
+              <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
                 <a 
                   href="#projects"
                   onClick={(e) => {
                     e.preventDefault();
                     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="text-sm font-semibold bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-5 py-3 rounded-lg hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-xs text-center flex-1 sm:flex-initial"
+                  className="text-xs sm:text-sm font-semibold bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-4 sm:px-5 py-3 rounded-lg hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-xs text-center flex-1 sm:flex-initial"
                 >
                   View Selected Work
                 </a>
@@ -68,7 +68,7 @@ const Hero = () => {
                     e.preventDefault();
                     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 px-5 py-3 rounded-lg transition-colors shadow-xs text-center flex-1 sm:flex-initial"
+                  className="text-xs sm:text-sm font-semibold text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 px-4 sm:px-5 py-3 rounded-lg transition-colors shadow-xs text-center flex-1 sm:flex-initial"
                 >
                   Contact Me
                 </a>
