@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 const ProjectCard = ({ title, category, description, fullDescription, features, tags, repoUrl, demoUrl, imageUrl, onOpenModal }) => {
+  const [isHoverDevice, setIsHoverDevice] = useState(false);
+
+  useEffect(() => {
+    setIsHoverDevice(window.matchMedia('(hover: hover) and (pointer: fine)').matches);
+  }, []);
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -12,6 +18,7 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
 
   const handleMouseMove = (e) => {
+    if (!isHoverDevice) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -24,6 +31,7 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
   };
 
   const handleMouseLeave = () => {
+    if (!isHoverDevice) return;
     x.set(0);
     y.set(0);
   };
@@ -44,11 +52,11 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
     <motion.div 
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{
+      style={isHoverDevice ? {
         rotateX,
         rotateY,
         transformStyle: "preserve-3d"
-      }}
+      } : {}}
       className="bg-white dark:bg-zinc-800 border border-zinc-200/90 dark:border-zinc-700/90 rounded-2xl overflow-hidden shadow-xs hover:border-zinc-300 dark:hover:border-zinc-600 transition-all duration-200 flex flex-col h-full group"
     >
       
@@ -56,7 +64,7 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
       <div 
         className="h-44 sm:h-48 bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200/80 dark:border-zinc-700/80 overflow-hidden relative cursor-pointer"
         onClick={() => onOpenModal && onOpenModal(projectData)}
-        style={{ transform: "translateZ(30px)" }}
+        style={isHoverDevice ? { transform: "translateZ(30px)" } : {}}
       >
         {imageUrl ? (
           <img 
@@ -79,7 +87,7 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
       </div>
 
       {/* Content */}
-      <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between space-y-4" style={{ transform: "translateZ(20px)" }}>
+      <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between space-y-4" style={isHoverDevice ? { transform: "translateZ(20px)" } : {}}>
         <div>
           <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider block mb-1">
             {category}
@@ -110,13 +118,13 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
           </div>
 
           <div className="flex items-center justify-between pt-3 border-t border-zinc-100 dark:border-zinc-700 text-xs">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1.5 sm:gap-3">
               {demoUrl && demoUrl !== '#' && demoUrl !== '' && (
                 <a 
                   href={demoUrl} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex items-center gap-1 py-1"
+                  className="font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex items-center gap-1 py-1.5 px-1.5 sm:px-0 rounded"
                 >
                   <i className="fas fa-external-link-alt text-[10px]" />
                   Live Demo
@@ -127,7 +135,7 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
                   href={repoUrl} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-200 flex items-center gap-1 py-1"
+                  className="font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-200 flex items-center gap-1 py-1.5 px-1.5 sm:px-0 rounded"
                 >
                   <i className="fab fa-github" />
                   Code
@@ -138,7 +146,7 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
             <button
               type="button"
               onClick={() => onOpenModal && onOpenModal(projectData)}
-              className="text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 font-medium transition-colors cursor-pointer py-1"
+              className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 font-medium transition-colors cursor-pointer py-1.5 px-2 -mr-1 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-700/50"
             >
               Details →
             </button>
