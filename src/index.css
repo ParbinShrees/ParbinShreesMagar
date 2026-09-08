@@ -2,6 +2,8 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 @theme {
+  --breakpoint-xs: 475px;
+
   --color-bg-main: #fafafa;
   --color-bg-card: #ffffff;
   --color-bg-muted: #f4f4f5;
