@@ -51,6 +51,15 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
     imageUrl
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (onOpenModal) {
+        onOpenModal(projectData);
+      }
+    }
+  };
+
   return (
     <motion.div 
       onMouseMove={enableTilt ? handleMouseMove : undefined}
@@ -65,7 +74,11 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
       
       {/* Project Image */}
       <div 
-        className="h-44 sm:h-48 bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200/80 dark:border-zinc-700/80 overflow-hidden relative cursor-pointer"
+        role="button"
+        tabIndex={0}
+        aria-label={`View details for ${title}`}
+        onKeyDown={handleKeyDown}
+        className="h-44 sm:h-48 bg-zinc-100 dark:bg-zinc-900 border-b border-zinc-200/80 dark:border-zinc-700/80 overflow-hidden relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500/50"
         onClick={() => onOpenModal && onOpenModal(projectData)}
         style={enableTilt ? { transform: "translateZ(30px)" } : {}}
       >
@@ -79,7 +92,9 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
             onError={(e) => {
               e.target.onerror = null;
               e.target.style.display = 'none';
-              e.target.nextSibling.style.display = 'block';
+              if (e.target.nextSibling) {
+                e.target.nextSibling.style.display = 'flex';
+              }
             }}
           />
         ) : null}
@@ -96,7 +111,10 @@ const ProjectCard = ({ title, category, description, fullDescription, features, 
             {category}
           </span>
           <h3 
-            className="text-lg font-bold text-zinc-950 dark:text-zinc-50 tracking-tight hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer mb-2"
+            role="button"
+            tabIndex={0}
+            onKeyDown={handleKeyDown}
+            className="text-lg font-bold text-zinc-950 dark:text-zinc-50 tracking-tight hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer mb-2 focus:outline-none focus:underline"
             onClick={() => onOpenModal && onOpenModal(projectData)}
           >
             {title}
