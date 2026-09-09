@@ -1,9 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Footer = () => {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavClick = (e, targetId) => {
+    if (isHome) {
+      e.preventDefault();
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
   };
 
   const currentYear = new Date().getFullYear();
@@ -19,11 +34,11 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-5 font-medium text-zinc-600 dark:text-zinc-400">
-          <Link to="/" className="hover:text-zinc-950 dark:hover:text-white py-1 transition-colors">Home</Link>
-          <a href="/#about" className="hover:text-zinc-950 dark:hover:text-white py-1 transition-colors">About</a>
-          <a href="/#projects" className="hover:text-zinc-950 dark:hover:text-white py-1 transition-colors">Projects</a>
-          <a href="/#skills" className="hover:text-zinc-950 dark:hover:text-white py-1 transition-colors">Skills</a>
-          <a href="/#contact" className="hover:text-zinc-950 dark:hover:text-white py-1 transition-colors">Contact</a>
+          <Link to="/" onClick={(e) => handleNavClick(e, 'home')} className="hover:text-zinc-950 dark:hover:text-white py-1 transition-colors">Home</Link>
+          <Link to="/#about" onClick={(e) => handleNavClick(e, 'about')} className="hover:text-zinc-950 dark:hover:text-white py-1 transition-colors">About</Link>
+          <Link to="/#projects" onClick={(e) => handleNavClick(e, 'projects')} className="hover:text-zinc-950 dark:hover:text-white py-1 transition-colors">Projects</Link>
+          <Link to="/#skills" onClick={(e) => handleNavClick(e, 'skills')} className="hover:text-zinc-950 dark:hover:text-white py-1 transition-colors">Skills</Link>
+          <Link to="/#contact" onClick={(e) => handleNavClick(e, 'contact')} className="hover:text-zinc-950 dark:hover:text-white py-1 transition-colors">Contact</Link>
           <Link to="/parbin" className="hover:text-zinc-950 dark:hover:text-white py-1 transition-colors">Behind the Code</Link>
         </div>
 
