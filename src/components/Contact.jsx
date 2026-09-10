@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 
 // ─── EmailJS Configuration ───────────────────────────────────────────────────
@@ -7,26 +7,59 @@ const EMAILJS_TEMPLATE_ID = 'template_elb55e9';
 const EMAILJS_PUBLIC_KEY  = 'RG5kmNlolyWeT5cJm';
 // ─────────────────────────────────────────────────────────────────────────────
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('idle'); // idle | submitting | success | error
   const [copied, setCopied] = useState(false);
+  const [validationError, setValidationError] = useState('');
+  // Keep refs to timers so we can clear them on unmount
+  const statusTimerRef = useRef(null);
+  const copiedTimerRef = useRef(null);
 
   const emailAddress = 'parbinshreesh64487@gmail.com';
 
+  // Cleanup timers on unmount to prevent memory leaks / state updates on unmounted component
+  useEffect(() => {
+    return () => {
+      if (statusTimerRef.current) clearTimeout(statusTimerRef.current);
+      if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
+    };
+  }, []);
+
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(emailAddress);
+    navigator.clipboard.writeText(emailAddress).catch(() => {});
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
+    copiedTimerRef.current = setTimeout(() => setCopied(false), 2000);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (validationError) setValidationError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Trim all fields before validation
+    const trimmedName    = formData.name.trim();
+    const trimmedEmail   = formData.email.trim();
+    const trimmedMessage = formData.message.trim();
+
+    if (!trimmedName || !trimmedEmail || !trimmedMessage) {
+      setValidationError('All fields are required and cannot be blank.');
+      return;
+    }
+
+    if (!EMAIL_REGEX.test(trimmedEmail)) {
+      setValidationError('Please enter a valid email address.');
+      return;
+    }
+
+    setValidationError('');
     setStatus('submitting');
 
     try {
@@ -34,21 +67,23 @@ const Contact = () => {
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         {
-          from_name:    formData.name,
-          from_email:   formData.email,
-          message:      formData.message,
-          to_name:      'Parbin',
+          from_name:  trimmedName,
+          from_email: trimmedEmail,
+          message:    trimmedMessage,
+          to_name:    'Parbin',
         },
         EMAILJS_PUBLIC_KEY
       );
 
       setStatus('success');
       setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setStatus('idle'), 5000);
+      if (statusTimerRef.current) clearTimeout(statusTimerRef.current);
+      statusTimerRef.current = setTimeout(() => setStatus('idle'), 5000);
     } catch (err) {
       console.error('EmailJS error:', err);
       setStatus('error');
-      setTimeout(() => setStatus('idle'), 5000);
+      if (statusTimerRef.current) clearTimeout(statusTimerRef.current);
+      statusTimerRef.current = setTimeout(() => setStatus('idle'), 5000);
     }
   };
 
@@ -197,17 +232,26 @@ const Contact = () => {
                 )}
               </button>
               
-              {status === 'success' && (
-                <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-lg text-xs text-emerald-800 dark:text-emerald-300 font-medium">
-                  ✓ Message sent successfully. I will get back to you soon.
-                </div>
-              )}
-              
-              {status === 'error' && (
-                <div className="p-3 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 rounded-lg text-xs text-red-700 dark:text-red-300 font-medium">
-                  Error sending message. Please email me directly at <a href={`mailto:${emailAddress}`} className="underline">{emailAddress}</a>.
-                </div>
-              )}
+              {/* ARIA live region announces status changes to screen readers */}
+              <div aria-live="polite" aria-atomic="true">
+                {validationError && (
+                  <div className="p-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-lg text-xs text-amber-800 dark:text-amber-300 font-medium">
+                    ⚠ {validationError}
+                  </div>
+                )}
+
+                {status === 'success' && (
+                  <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-lg text-xs text-emerald-800 dark:text-emerald-300 font-medium">
+                    ✓ Message sent successfully. I will get back to you soon.
+                  </div>
+                )}
+
+                {status === 'error' && (
+                  <div className="p-3 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 rounded-lg text-xs text-red-700 dark:text-red-300 font-medium">
+                    Error sending message. Please email me directly at <a href={`mailto:${emailAddress}`} className="underline">{emailAddress}</a>.
+                  </div>
+                )}
+              </div>
             </form>
           </div>
 
