@@ -106,6 +106,18 @@ const GallerySlider = () => {
     setTouchEnd(0);
   };
 
+  // Lock body scroll when lightbox is open
+  useEffect(() => {
+    if (lightbox) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [lightbox]);
+
   // Keyboard nav
   useEffect(() => {
     const handler = (e) => {
